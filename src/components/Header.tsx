@@ -8,8 +8,8 @@ const nav = [
   { href: mainHref("/#produk"), label: "Produk" },
   { href: posHref(), label: "TapPOS" },
   { href: mainHref("/#keunggulan"), label: "Keunggulan" },
-  { href: mainHref("/#tentang"), label: "Tentang" },
-  { href: mainHref("/#faq"), label: "FAQ" },
+  { href: mainHref("/blog"), label: "Blog" },
+  { href: mainHref("/tentang-kami"), label: "Tentang" },
 ];
 
 export default function Header() {

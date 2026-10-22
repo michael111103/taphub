@@ -18,6 +18,9 @@ npm run check-links  # cek link rusak (jalankan setelah npm run start)
 | --- | --- |
 | `taphub.id` | Company profile TapHub: ekosistem, produk, keunggulan, tentang, FAQ, kartu konsultasi |
 | `pos.taphub.id` | Landing page TapPOS (kode di `src/app/pos/`), dengan sitemap dan robots sendiri |
+| `taphub.id/blog` | Daftar artikel dengan pencarian dan filter kategori |
+| `taphub.id/blog/<slug>` | Halaman artikel (SEO, daftar isi, artikel terkait) |
+| `taphub.id/tentang-kami` | Tentang TapHub: cerita, visi misi, nilai, perjalanan, kantor |
 | `taphub.id/hubungi-kami` | Halaman konsultasi + formulir WhatsApp |
 | `taphub.id/kebijakan-privasi`, `taphub.id/syarat-ketentuan` | Halaman legal |
 
@@ -38,6 +41,12 @@ Pengaturan subdomain ada di `src/middleware.ts`:
    Tanpa dua variabel ini, link antar `taphub.id` dan `pos.taphub.id` tidak akan benar.
 4. Google Search Console: daftarkan `taphub.id` dan `pos.taphub.id`, lalu kirim sitemap masing-masing (`/sitemap.xml`).
 
+## Menambah artikel blog
+
+Semua artikel ada di `src/lib/articles.ts`. Salin satu objek artikel, ganti `slug`, judul, deskripsi, kategori, tanggal, kata kunci, dan isinya, lalu taruh gambar sampul (1200×630) di `public/images/`. Halaman artikel, kartu di `/blog`, filter kategori, sitemap, dan data SEO dibuat otomatis.
+
+Tips SEO: pakai kata kunci utama di judul, deskripsi 140 sampai 160 karakter, dan subjudul yang menjawab pertanyaan pembaca.
+
 ## Testimoni
 
 Bagian testimoni di halaman TapPOS otomatis tersembunyi selama `src/lib/testimonials.ts` kosong.
@@ -51,7 +60,7 @@ Daftar produk Tap ada di `src/lib/products.ts`, FAQ di `src/lib/faq.ts`.
 ## Gambar yang perlu diganti
 
 File di bawah masih gambar sementara. Timpa dengan gambar asli **dengan nama dan rasio yang sama**,
-atau ganti nama filenya di `src/app/pos/page.tsx` (bagian `modules` dan `industries`) lalu perbarui teks `alt`:
+atau ganti nama filenya di kode (`src/app/pos/page.tsx`, `src/lib/articles.ts`, `src/app/tentang-kami/page.tsx`) lalu perbarui teks `alt`:
 
 | File | Ukuran | Isi |
 | --- | --- | --- |
@@ -62,6 +71,10 @@ atau ganti nama filenya di `src/app/pos/page.tsx` (bagian `modules` dan `industr
 | `public/images/taphubpos5.png` | 1200×900 (4:3) | Produk & stok |
 | `public/images/taphubpos6.png` | 1200×800 (3:2) | Usaha F&B |
 | `public/images/taphubpos7.png` | 1200×800 (3:2) | Retail & jasa |
+| `public/images/artikel1.png` | 1200×630 | Sampul artikel aplikasi kasir cafe |
+| `public/images/artikel2.png` | 1200×630 | Sampul artikel sistem POS |
+| `public/images/tentang1.png` | 1600×900 (16:9) | Foto tim atau suasana kerja (halaman Tentang) |
+| `public/images/tentang2.png` | 1200×900 (4:3) | Foto gedung atau kantor (halaman Tentang) |
 
 Logo: `public/whitelogo.png` (asli, tulisan Tap hitam) dipotong jadi `public/taphub-logo-dark.png` untuk latar terang (header). `public/taphub.png` (asli, tulisan Tap putih) dipotong jadi `public/taphub-logo.png` untuk latar gelap (footer).
 
