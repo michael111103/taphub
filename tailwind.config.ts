@@ -39,6 +39,10 @@ const config: Config = {
         flow: {
           to: { strokeDashoffset: "-200" },
         },
+        slide: {
+          from: { left: "2rem" },
+          to: { left: "calc(100% - 4.5rem)" },
+        },
       },
       animation: {
         "order-in": "order-in 7s ease-out infinite",

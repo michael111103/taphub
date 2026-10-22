@@ -16,7 +16,7 @@ npm run check-links  # cek link rusak (jalankan setelah npm run start)
 
 | URL | Isi |
 | --- | --- |
-| `/` | Company profile TapHub: ekosistem, produk, keunggulan, solusi per industri, tentang perusahaan, FAQ, kontak |
+| `/` | Company profile TapHub: ekosistem, produk, keunggulan (kartu fondasi), tentang perusahaan, FAQ, kontak |
 | `/page/aplikasi-pemesanan-qr-cafe` | Landing page TapOrder (SEO sendiri: judul, deskripsi, gambar share, data terstruktur) |
 | `/kebijakan-privasi`, `/syarat-ketentuan` | Halaman legal |
 
@@ -36,11 +36,8 @@ File di bawah masih gambar sementara. Timpa dengan foto asli **dengan nama dan r
 | File | Ukuran | Isi |
 | --- | --- | --- |
 | `public/images/taporder-scan.jpg` | 1000×1250 (4:5) | Pelanggan scan QR di meja |
-| `public/images/usaha-cafe.jpg` | 1200×900 (4:3) | Suasana cafe |
-| `public/images/usaha-restoran.jpg` | 1200×900 (4:3) | Restoran / rumah makan |
-| `public/images/usaha-toko.jpg` | 1200×900 (4:3) | Toko / UMKM |
 
-Kalau nama file diganti, ubah juga di `src/app/page.tsx`, dan perbarui teks `alt` supaya sesuai isi foto.
+Kalau nama file diganti, ubah juga di `src/app/page/aplikasi-pemesanan-qr-cafe/page.tsx`, dan perbarui teks `alt` supaya sesuai isi foto.
 
 Logo: `public/taphub.png` (asli) dan `public/taphub-logo.png` (versi dipotong untuk header/footer).
 Favicon dan gambar share (WhatsApp/sosmed) dibuat otomatis dari kode: `src/app/icon.tsx`, `src/app/apple-icon.tsx`, `src/app/opengraph-image.tsx`.

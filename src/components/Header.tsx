@@ -8,7 +8,7 @@ import { TAPORDER_PATH } from "@/lib/products";
 const nav = [
   { href: "/#produk", label: "Produk" },
   { href: TAPORDER_PATH, label: "TapOrder" },
-  { href: "/#industri", label: "Solusi" },
+  { href: "/#keunggulan", label: "Keunggulan" },
   { href: "/#tentang", label: "Tentang" },
   { href: "/#faq", label: "FAQ" },
 ];

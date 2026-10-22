@@ -38,7 +38,7 @@ export default function Footer() {
           <h2 className="text-sm font-semibold">TapHub</h2>
           <ul className="mt-4 space-y-3 text-sm text-muted">
             <li><Link href="/#tentang" className="hover:text-fg">Tentang kami</Link></li>
-            <li><Link href="/#industri" className="hover:text-fg">Solusi</Link></li>
+            <li><Link href="/#keunggulan" className="hover:text-fg">Keunggulan</Link></li>
             <li><Link href="/#faq" className="hover:text-fg">FAQ</Link></li>
             <li><Link href="/#kontak" className="hover:text-fg">Kontak</Link></li>
             <li><Link href="/kebijakan-privasi" className="hover:text-fg">Kebijakan Privasi</Link></li>
