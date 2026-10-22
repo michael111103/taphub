@@ -2,10 +2,10 @@ import Link from "next/link";
 import Ecosystem from "@/components/Ecosystem";
 import ProductGrid from "@/components/ProductGrid";
 import FoundationGrid from "@/components/FoundationGrid";
-import ContactForm from "@/components/ContactForm";
+import CtaCard from "@/components/CtaCard";
 import FaqList from "@/components/FaqList";
 import { companyFaqs } from "@/lib/faq";
-import { site, whatsappLink } from "@/lib/site";
+import { whatsappLink } from "@/lib/site";
 
 const missions = [
   "Membuat software bisnis yang mudah dipakai tanpa pelatihan panjang.",
@@ -115,7 +115,7 @@ export default function Home() {
       <section id="faq" aria-labelledby="faq-judul" className="border-t border-line">
         <div className="mx-auto grid max-w-page gap-12 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-[1fr_1.5fr]">
           <div>
-            <h2 id="faq-judul" className="text-3xl font-semibold tracking-[-0.02em] sm:text-5xl">Pertanyaan yang sering ditanyakan</h2>
+            <h2 id="faq-judul" className="text-3xl font-semibold tracking-[-0.02em] sm:text-5xl">FAQ seputar TapHub</h2>
             <p className="mt-5 leading-7 text-muted">
               Belum terjawab?{" "}
               <a href={whatsappLink("Halo TapHub, saya mau bertanya.")} target="_blank" rel="noopener noreferrer" className="text-tide-1 underline underline-offset-4">
@@ -128,31 +128,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* KONTAK */}
-      <section id="kontak" aria-labelledby="kontak-judul" className="relative overflow-hidden border-t border-line">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[420px] bg-[radial-gradient(50%_70%_at_50%_100%,rgba(27,91,255,0.28),transparent_70%)]" />
-        <div className="mx-auto grid max-w-page gap-12 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-[1fr_1.3fr]">
-          <div>
-            <h2 id="kontak-judul" className="text-balance text-3xl font-semibold tracking-[-0.02em] sm:text-5xl">
-              Ceritakan usahamu ke kami.
-            </h2>
-            <p className="mt-5 max-w-md text-lg leading-8 text-muted">
-              Kami bantu pilih produk TapHub yang paling sesuai. Isi formulir, lalu kami balas lewat WhatsApp.
-            </p>
-            <dl className="mt-10 space-y-4 text-sm">
-              <div>
-                <dt className="text-muted">Email</dt>
-                <dd className="mt-1"><a href={`mailto:${site.email}`} className="underline underline-offset-4">{site.email}</a></dd>
-              </div>
-              <div>
-                <dt className="text-muted">Kantor</dt>
-                <dd className="mt-1 leading-6">{site.company.address.join(", ")}</dd>
-              </div>
-            </dl>
-          </div>
-          <div className="rounded-[28px] border border-line bg-panel/80 p-6 backdrop-blur sm:p-8">
-            <ContactForm />
-          </div>
+      {/* AJAKAN KONSULTASI */}
+      <section id="kontak" aria-label="Konsultasi" className="border-t border-line">
+        <div className="mx-auto max-w-page px-4 py-20 sm:px-6 sm:py-28">
+          <CtaCard />
         </div>
       </section>
     </>

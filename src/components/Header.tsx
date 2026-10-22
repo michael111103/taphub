@@ -53,7 +53,7 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link href="/#kontak" className="btn-tide hidden !py-2.5 sm:inline-flex">
+          <Link href="/hubungi-kami" className="btn-tide hidden !py-2.5 sm:inline-flex">
             Hubungi kami
           </Link>
           <button
@@ -91,7 +91,7 @@ export default function Header() {
             ))}
           </ul>
         </nav>
-        <Link href="/#kontak" className="btn-tide mt-6 w-full" onClick={() => setOpen(false)}>
+        <Link href="/hubungi-kami" className="btn-tide mt-6 w-full" onClick={() => setOpen(false)}>
           Hubungi kami
         </Link>
       </div>

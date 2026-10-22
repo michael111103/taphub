@@ -40,7 +40,7 @@ export default function Footer() {
             <li><Link href="/#tentang" className="hover:text-fg">Tentang kami</Link></li>
             <li><Link href="/#keunggulan" className="hover:text-fg">Keunggulan</Link></li>
             <li><Link href="/#faq" className="hover:text-fg">FAQ</Link></li>
-            <li><Link href="/#kontak" className="hover:text-fg">Kontak</Link></li>
+            <li><Link href="/hubungi-kami" className="hover:text-fg">Hubungi kami</Link></li>
             <li><Link href="/kebijakan-privasi" className="hover:text-fg">Kebijakan Privasi</Link></li>
             <li><Link href="/syarat-ketentuan" className="hover:text-fg">Syarat &amp; Ketentuan</Link></li>
           </ul>

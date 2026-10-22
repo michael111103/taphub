@@ -18,7 +18,7 @@ export default function NotFound() {
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Link href="/" className="btn-tide">Kembali ke beranda</Link>
-          <Link href="/#kontak" className="btn-ghost">Hubungi kami</Link>
+          <Link href="/hubungi-kami" className="btn-ghost">Hubungi kami</Link>
         </div>
       </div>
     </section>

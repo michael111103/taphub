@@ -110,7 +110,7 @@ export default function ContactForm({ product }: { product?: string }) {
       </div>
       <div className="flex flex-col gap-3 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-xs leading-5 text-muted">Formulir ini membuka WhatsApp dengan pesan yang sudah terisi.</p>
-        <button type="submit" className="btn-tide">Kirim lewat WhatsApp</button>
+        <button type="submit" className="btn-tide shrink-0 whitespace-nowrap">Kirim lewat WhatsApp</button>
       </div>
     </form>
   );
