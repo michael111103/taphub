@@ -16,11 +16,12 @@ export const metadata: Metadata = {
   applicationName: site.name,
   keywords: [
     "TapHub",
+    "software bisnis Indonesia",
+    "software UMKM",
+    "aplikasi usaha",
     "TapOrder",
-    "QR order cafe",
-    "aplikasi kasir cafe",
-    "POS restoran",
-    "software UMKM Indonesia",
+    "TapPOS",
+    "TapBooks",
   ],
   alternates: { canonical: "/" },
   openGraph: {

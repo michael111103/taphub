@@ -1,9 +1,14 @@
 export type ProductCategory = "Penjualan" | "Keuangan" | "Operasional" | "Gaya hidup";
 export type ProductStatus = "pilot" | "soon";
 
+/** Landing page TapOrder. Slug memakai kata kunci yang dicari orang di Google. */
+export const TAPORDER_PATH = "/page/aplikasi-pemesanan-qr-cafe";
+
 export type Product = {
   slug: string;
   name: string;
+  /** Link ke landing page produk, jika sudah ada */
+  href?: string;
   summary: string;
   category: ProductCategory;
   status: ProductStatus;
@@ -19,6 +24,7 @@ export const products: Product[] = [
   {
     slug: "taporder",
     name: "TapOrder",
+    href: TAPORDER_PATH,
     summary: "Pelanggan scan QR di meja, pesan, dan bayar sendiri. Pesanan langsung masuk ke kasir dan dapur.",
     category: "Penjualan",
     status: "pilot",

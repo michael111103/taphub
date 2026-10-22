@@ -61,13 +61,13 @@ export default function ProductGrid() {
           );
           return (
             <li key={p.slug}>
-              {pilot ? (
+              {p.href ? (
                 <Link
-                  href="/#taporder"
+                  href={p.href}
                   className="group block h-full rounded-3xl border border-tide-1/30 bg-gradient-to-b from-tide-2/[0.12] to-panel p-5 transition hover:border-tide-1/60"
                 >
                   {body}
-                  <span className="mt-4 inline-block text-sm font-semibold text-tide-1">Lihat cara kerjanya</span>
+                  <span className="mt-4 inline-block text-sm font-semibold text-tide-1">Pelajari {p.name}</span>
                 </Link>
               ) : (
                 <div className="h-full rounded-3xl border border-line bg-panel p-5">{body}</div>

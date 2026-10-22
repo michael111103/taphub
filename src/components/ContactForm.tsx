@@ -2,25 +2,33 @@
 
 import { useState } from "react";
 import { whatsappLink } from "@/lib/site";
+import { products } from "@/lib/products";
 
-type Fields = { name: string; business: string; type: string; phone: string; message: string };
+type Fields = { name: string; business: string; type: string; product: string; phone: string; message: string };
 type Errors = Partial<Record<keyof Fields, string>>;
 
-const empty: Fields = { name: "", business: "", type: "", phone: "", message: "" };
-const businessTypes = ["Cafe", "Restoran / rumah makan", "Toko / retail", "Lainnya"];
+const businessTypes = ["Cafe", "Restoran / rumah makan", "Toko / retail", "Jasa", "Lainnya"];
 
-export function validate(f: Fields): Errors {
+function validate(f: Fields, needProduct: boolean): Errors {
   const e: Errors = {};
   if (f.name.trim().length < 2) e.name = "Isi nama kamu, minimal 2 huruf.";
   if (f.business.trim().length < 2) e.business = "Isi nama usahamu.";
   if (!f.type) e.type = "Pilih jenis usaha.";
+  if (needProduct && !f.product) e.product = "Pilih produk yang kamu minati.";
   const digits = f.phone.replace(/\D/g, "");
   if (!/^(0|62)8\d{7,11}$/.test(digits)) e.phone = "Isi nomor WhatsApp yang valid, contoh 0812 3456 7890.";
   if (f.message.length > 500) e.message = "Pesan maksimal 500 karakter.";
   return e;
 }
 
-export default function ContactForm() {
+/**
+ * Formulir kontak yang membuka WhatsApp dengan pesan terisi.
+ * - Tanpa prop `product`: pengunjung memilih produk (dipakai di beranda).
+ * - Dengan prop `product`: produk sudah ditentukan (dipakai di landing page produk).
+ */
+export default function ContactForm({ product }: { product?: string }) {
+  const empty: Fields = { name: "", business: "", type: "", product: product ?? "", phone: "", message: "" };
+  const needProduct = !product;
   const [fields, setFields] = useState<Fields>(empty);
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
@@ -32,15 +40,16 @@ export default function ContactForm() {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const found = validate(fields);
+    const found = validate(fields, needProduct);
     setErrors(found);
     const first = Object.keys(found)[0];
     if (first) {
       document.getElementById(`f-${first}`)?.focus();
       return;
     }
+    const interest = fields.product === "Belum tahu" ? "produk TapHub" : fields.product;
     const text = [
-      "Halo TapHub, saya tertarik dengan TapOrder.",
+      `Halo TapHub, saya tertarik dengan ${interest}.`,
       `Nama: ${fields.name.trim()}`,
       `Usaha: ${fields.business.trim()} (${fields.type})`,
       `WhatsApp: ${fields.phone.trim()}`,
@@ -80,12 +89,23 @@ export default function ContactForm() {
           {businessTypes.map((t) => <option key={t} value={t}>{t}</option>)}
         </select>
       </Field>
-      <Field id="phone" label="Nomor WhatsApp" error={errors.phone}>
-        <input id="f-phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="0812 3456 7890" value={fields.phone} onChange={set("phone")} className={inputCls(errors.phone)} aria-invalid={!!errors.phone} aria-describedby={errors.phone ? "e-phone" : undefined} />
-      </Field>
+      {needProduct ? (
+        <Field id="product" label="Produk yang diminati" error={errors.product}>
+          <select id="f-product" name="product" value={fields.product} onChange={set("product")} className={inputCls(errors.product)} aria-invalid={!!errors.product} aria-describedby={errors.product ? "e-product" : undefined}>
+            <option value="">Pilih produk</option>
+            {products.map((p) => <option key={p.slug} value={p.name}>{p.name}</option>)}
+            <option value="Belum tahu">Belum tahu, minta saran</option>
+          </select>
+        </Field>
+      ) : null}
+      <div className={needProduct ? "sm:col-span-2" : ""}>
+        <Field id="phone" label="Nomor WhatsApp" error={errors.phone}>
+          <input id="f-phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="0812 3456 7890" value={fields.phone} onChange={set("phone")} className={inputCls(errors.phone)} aria-invalid={!!errors.phone} aria-describedby={errors.phone ? "e-phone" : undefined} />
+        </Field>
+      </div>
       <div className="sm:col-span-2">
         <Field id="message" label="Pesan (opsional)" error={errors.message}>
-          <textarea id="f-message" name="message" rows={4} maxLength={600} value={fields.message} onChange={set("message")} className={inputCls(errors.message)} aria-invalid={!!errors.message} aria-describedby={errors.message ? "e-message" : undefined} placeholder="Contoh: cafe saya punya 12 meja, buka jam 10 sampai 22." />
+          <textarea id="f-message" name="message" rows={4} maxLength={600} value={fields.message} onChange={set("message")} className={inputCls(errors.message)} aria-invalid={!!errors.message} aria-describedby={errors.message ? "e-message" : undefined} placeholder="Ceritakan sedikit tentang usahamu." />
         </Field>
       </div>
       <div className="flex flex-col gap-3 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">

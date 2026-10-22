@@ -3,11 +3,13 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Logo from "./Logo";
+import { TAPORDER_PATH } from "@/lib/products";
 
 const nav = [
   { href: "/#produk", label: "Produk" },
-  { href: "/#taporder", label: "TapOrder" },
-  { href: "/#harga", label: "Harga" },
+  { href: TAPORDER_PATH, label: "TapOrder" },
+  { href: "/#industri", label: "Solusi" },
+  { href: "/#tentang", label: "Tentang" },
   { href: "/#faq", label: "FAQ" },
 ];
 

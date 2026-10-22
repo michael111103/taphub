@@ -12,6 +12,18 @@ npm run start        # jalankan hasil build
 npm run check-links  # cek link rusak (jalankan setelah npm run start)
 ```
 
+## Struktur halaman
+
+| URL | Isi |
+| --- | --- |
+| `/` | Company profile TapHub: ekosistem, produk, keunggulan, solusi per industri, tentang perusahaan, FAQ, kontak |
+| `/page/aplikasi-pemesanan-qr-cafe` | Landing page TapOrder (SEO sendiri: judul, deskripsi, gambar share, data terstruktur) |
+| `/kebijakan-privasi`, `/syarat-ketentuan` | Halaman legal |
+
+Menambah landing page produk baru:
+1. Buat folder `src/app/page/<slug-kata-kunci>/` dengan `page.tsx` (contoh: salin folder TapOrder).
+2. Isi `href` produk di `src/lib/products.ts`. Kartu produk, footer, dan sitemap otomatis mengikuti.
+
 ## Data yang perlu dicek
 
 Semua data perusahaan ada di `src/lib/site.ts`: domain, email, nomor WhatsApp, alamat PT, link Instagram.
@@ -42,8 +54,8 @@ Analytics hanya aktif setelah pengunjung menekan "Setuju" di banner cookie.
 
 1. Privacy policy: `/kebijakan-privasi`
 2. Terms page: `/syarat-ketentuan`
-3. CTA jelas: "Daftar program pilot" di hero, harga, dan header
-4. FAQ: bagian `#faq` + data terstruktur FAQPage
+3. CTA jelas: "Chat lewat WhatsApp" di beranda, "Daftar program pilot" di landing page TapOrder, "Hubungi kami" di header
+4. FAQ: FAQ umum di beranda dan FAQ TapOrder di landing page, keduanya dengan data terstruktur FAQPage
 5. robots.txt: `src/app/robots.ts`
 6. sitemap.xml: `src/app/sitemap.ts`
 7. Custom 404: `src/app/not-found.tsx`

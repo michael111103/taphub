@@ -1,67 +1,74 @@
 import Image from "next/image";
 import Link from "next/link";
-import HeroDashboard from "@/components/HeroDashboard";
 import Ecosystem from "@/components/Ecosystem";
 import ProductGrid from "@/components/ProductGrid";
-import PhoneMenu from "@/components/PhoneMenu";
+import ProductIcon from "@/components/ProductIcon";
 import ContactForm from "@/components/ContactForm";
-import { faqs } from "@/lib/faq";
+import FaqList from "@/components/FaqList";
+import { companyFaqs } from "@/lib/faq";
+import { products } from "@/lib/products";
 import { site, whatsappLink } from "@/lib/site";
 
-const steps = [
-  { title: "Pelanggan scan QR di meja", body: "Setiap meja punya QR sendiri, jadi nomor meja tercatat otomatis." },
-  { title: "Pilih menu dari HP", body: "Menu terbuka di browser. Tidak perlu install aplikasi atau daftar akun." },
-  { title: "Bayar langsung", body: "QRIS, e-wallet, atau virtual account. Pesanan baru diteruskan setelah lunas." },
-  { title: "Pesanan masuk ke kasir dan dapur", body: "Dashboard berbunyi saat ada pesanan baru, lengkap dengan nomor meja." },
+const bySlug = (slug: string) => products.find((p) => p.slug === slug)!;
+
+const pillars = [
+  {
+    title: "Saling terhubung",
+    body: "Produk Tap dirancang berbagi data. Penjualan dari TapOrder bisa mengalir ke stok dan pembukuan tanpa input ulang.",
+    icon: "M8 7a3 3 0 1 0-6 0 3 3 0 0 0 6 0zM22 17a3 3 0 1 0-6 0 3 3 0 0 0 6 0zM8 7h5a3 3 0 0 1 3 3v4",
+  },
+  {
+    title: "Mulai dari satu produk",
+    body: "Pakai yang kamu butuhkan sekarang. Tambah produk lain saat usahamu berkembang, tanpa pindah sistem.",
+    icon: "M12 5v14M5 12h14",
+  },
+  {
+    title: "Dibuat untuk Indonesia",
+    body: "Berbahasa Indonesia, memakai Rupiah, dan mendukung QRIS, e-wallet, serta virtual account bank lokal.",
+    icon: "M4 21V4M4 4h12l-2 4 2 4H4",
+  },
+  {
+    title: "Pembayaran lewat mitra berlisensi",
+    body: "Uang pelanggan diproses payment gateway berlisensi dan masuk ke saldo usahamu sendiri, bukan ke rekening kami.",
+    icon: "M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6zM9 12l2 2 4-4",
+  },
 ];
 
-const audiences = [
-  { img: "/images/usaha-cafe.jpg", alt: "Suasana cafe dengan pelanggan duduk di meja", title: "Cafe", body: "Antrean kasir berkurang saat jam ramai, pelanggan bisa pesan lagi tanpa memanggil pelayan." },
-  { img: "/images/usaha-restoran.jpg", alt: "Rumah makan dengan beberapa meja makan", title: "Restoran", body: "Pesanan per meja langsung tercatat, mengurangi salah catat dari dapur ke meja." },
-  { img: "/images/usaha-toko.jpg", alt: "Etalase toko kecil dengan pemilik di balik meja kasir", title: "Toko dan UMKM", body: "Mulai dari satu tablet. Produk Tap lain menyusul untuk kasir, stok, dan pembukuan." },
+const industries = [
+  { img: "/images/usaha-cafe.jpg", alt: "Suasana cafe dengan pelanggan duduk di meja", title: "Cafe dan kedai kopi", body: "Pesanan dari meja, kasir, dan stok bahan dalam satu alur.", picks: ["taporder", "tappos", "tapstock"] },
+  { img: "/images/usaha-restoran.jpg", alt: "Rumah makan dengan beberapa meja makan", title: "Restoran", body: "Pesanan per meja, reservasi, dan jadwal karyawan tetap rapi saat ramai.", picks: ["taporder", "tapreserve", "tapstaff"] },
+  { img: "/images/usaha-toko.jpg", alt: "Etalase toko kecil dengan pemilik di balik meja kasir", title: "Toko dan UMKM", body: "Kasir, stok barang, dan pembukuan untuk usaha yang dikelola sendiri.", picks: ["tappos", "tapstock", "tapbooks"] },
 ];
 
-const pricingPoints = [
-  "Tidak perlu mesin kasir khusus, cukup tablet atau HP",
-  "Uang masuk ke saldo usahamu sendiri lewat payment gateway berlisensi",
-  "QR per meja dan dashboard pesanan real time",
-  "Laporan penjualan harian",
+const missions = [
+  "Membuat software bisnis yang mudah dipakai tanpa pelatihan panjang.",
+  "Menjaga harga tetap terjangkau untuk usaha kecil dan menengah.",
+  "Menghubungkan penjualan, keuangan, dan operasional dalam satu ekosistem.",
 ];
-
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((f) => ({
-    "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
-  })),
-};
 
 export default function Home() {
   return (
     <>
       {/* HERO */}
       <section className="relative overflow-hidden">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_70%_20%,rgba(27,91,255,0.22),transparent_70%),radial-gradient(40%_40%_at_10%_0%,rgba(56,200,248,0.12),transparent_70%)]" />
-        <div className="mx-auto grid max-w-page items-center gap-14 px-4 pb-20 pt-12 sm:px-6 sm:pt-20 lg:grid-cols-[1fr_1.15fr] lg:gap-10 lg:pb-28">
-          <div>
-            <p className="inline-flex items-center gap-2 rounded-full border border-line bg-panel px-3 py-1.5 text-xs text-muted">
-              <span className="h-1.5 w-1.5 rounded-full bg-tide-1" />
-              TapOrder sedang membuka program pilot
-            </p>
-            <h1 className="mt-6 text-balance text-[2.5rem] font-semibold leading-[1.05] tracking-[-0.03em] sm:text-6xl">
-              Pesanan masuk sendiri. Kamu fokus melayani.
-            </h1>
-            <p className="mt-6 max-w-xl text-pretty text-lg leading-8 text-muted">
-              TapHub membuat software untuk usaha Indonesia. Dimulai dari TapOrder: pelanggan scan QR di meja, pesan, dan bayar dari HP. Pesanan langsung muncul di kasir.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/#kontak" className="btn-tide">Daftar program pilot</Link>
-              <Link href="/#produk" className="btn-ghost">Lihat semua produk</Link>
-            </div>
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(55%_45%_at_50%_0%,rgba(27,91,255,0.28),transparent_70%),radial-gradient(30%_30%_at_15%_60%,rgba(56,200,248,0.10),transparent_70%)]" />
+        <div className="mx-auto max-w-page px-4 pb-16 pt-14 text-center sm:px-6 sm:pt-24">
+          <h1 className="mx-auto max-w-4xl text-balance text-[2.5rem] font-semibold leading-[1.05] tracking-[-0.03em] sm:text-6xl lg:text-7xl">
+            Software yang saling terhubung untuk usaha Indonesia.
+          </h1>
+          <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-8 text-muted">
+            TapHub menyediakan rangkaian aplikasi untuk penjualan, keuangan, operasional, dan gaya hidup. Mulai dari satu produk, tambah yang lain saat usahamu berkembang.
+          </p>
+          <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+            <a href={whatsappLink("Halo TapHub, saya mau tanya soal produk TapHub.")} target="_blank" rel="noopener noreferrer" className="btn-tide">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .3-3.4-.7-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.2-1.6-1.2-3s.7-2.2 1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.2z" /></svg>
+              Chat lewat WhatsApp
+            </a>
+            <Link href="/#produk" className="btn-ghost">Lihat produk TapHub</Link>
           </div>
-          <HeroDashboard />
+          <div className="mt-16 sm:mt-20">
+            <Ecosystem />
+          </div>
         </div>
       </section>
 
@@ -70,74 +77,72 @@ export default function Home() {
         <div className="mx-auto max-w-page px-4 py-20 sm:px-6 sm:py-28">
           <div className="max-w-2xl">
             <h2 id="produk-judul" className="text-balance text-3xl font-semibold tracking-[-0.02em] sm:text-5xl">
-              Satu akun, banyak alat untuk usahamu.
+              Produk TapHub
             </h2>
             <p className="mt-5 text-lg leading-8 text-muted">
-              Setiap produk Tap bisa dipakai sendiri, dan saling terhubung saat dipakai bersama. Data penjualan dari TapOrder nantinya otomatis mengalir ke pembukuan dan stok.
+              Setiap produk menangani satu pekerjaan dengan baik. Kami merilisnya bertahap, dimulai dari TapOrder.
             </p>
           </div>
-          <div className="mt-14">
-            <Ecosystem />
-          </div>
-          <div className="mt-16">
+          <div className="mt-12">
             <ProductGrid />
           </div>
         </div>
       </section>
 
-      {/* TAPORDER */}
-      <section id="taporder" aria-labelledby="taporder-judul" className="relative overflow-hidden border-t border-line">
-        <div aria-hidden="true" className="pointer-events-none absolute -right-40 top-20 -z-10 h-[520px] w-[520px] rounded-full bg-tide-2/20 blur-[120px]" />
-        <div className="mx-auto grid max-w-page gap-16 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-2 lg:items-center">
-          <div>
-            <h2 id="taporder-judul" className="text-balance text-3xl font-semibold tracking-[-0.02em] sm:text-5xl">
-              TapOrder: dari meja ke dapur tanpa antre di kasir.
-            </h2>
-            <ol className="mt-10 space-y-6">
-              {steps.map((s, i) => (
-                <li key={s.title} className="grid grid-cols-[2.5rem_1fr] gap-4">
-                  <span className="grid h-10 w-10 place-items-center rounded-full border border-tide-1/40 bg-tide-2/10 text-sm font-semibold text-tide-1">
-                    {i + 1}
-                  </span>
-                  <div>
-                    <h3 className="font-semibold">{s.title}</h3>
-                    <p className="mt-1 leading-7 text-muted">{s.body}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-          <div className="relative pb-10">
-            <div className="w-[72%] overflow-hidden rounded-[28px] border border-line sm:w-[62%]">
-              <Image
-                src="/images/taporder-scan.jpg"
-                alt="Pelanggan memindai kode QR di meja cafe dengan HP"
-                width={1000}
-                height={1250}
-                sizes="(min-width: 1024px) 30vw, 72vw"
-                className="aspect-[4/5] w-full object-cover"
-              />
-            </div>
-            <div className="absolute bottom-0 right-0 origin-bottom-right scale-[0.78] sm:scale-100">
-              <PhoneMenu />
-            </div>
-          </div>
+      {/* KEUNGGULAN */}
+      <section id="keunggulan" aria-labelledby="keunggulan-judul" className="relative overflow-hidden border-t border-line">
+        <div aria-hidden="true" className="pointer-events-none absolute -left-40 top-10 -z-10 h-[460px] w-[460px] rounded-full bg-tide-2/15 blur-[120px]" />
+        <div className="mx-auto grid max-w-page gap-14 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-[1fr_1.4fr]">
+          <h2 id="keunggulan-judul" className="text-balance text-3xl font-semibold tracking-[-0.02em] sm:text-5xl">
+            Kenapa usaha memilih TapHub
+          </h2>
+          <ul className="grid gap-x-10 gap-y-10 sm:grid-cols-2">
+            {pillars.map((p) => (
+              <li key={p.title} className="border-t border-line pt-6">
+                <span aria-hidden="true" className="grid h-10 w-10 place-items-center rounded-xl border border-tide-1/30 bg-tide-2/10">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38C8F8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={p.icon} /></svg>
+                </span>
+                <h3 className="mt-5 text-lg font-semibold">{p.title}</h3>
+                <p className="mt-2 leading-7 text-muted">{p.body}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      {/* UNTUK SIAPA */}
-      <section aria-labelledby="siapa-judul" className="border-t border-line">
+      {/* INDUSTRI */}
+      <section id="industri" aria-labelledby="industri-judul" className="border-t border-line">
         <div className="mx-auto max-w-page px-4 py-20 sm:px-6 sm:py-28">
-          <h2 id="siapa-judul" className="max-w-2xl text-balance text-3xl font-semibold tracking-[-0.02em] sm:text-5xl">
-            Dibuat untuk usaha yang sibuk melayani.
+          <h2 id="industri-judul" className="max-w-2xl text-balance text-3xl font-semibold tracking-[-0.02em] sm:text-5xl">
+            Solusi untuk setiap jenis usaha
           </h2>
           <ul className="mt-12 grid gap-6 md:grid-cols-3">
-            {audiences.map((a) => (
-              <li key={a.title} className="overflow-hidden rounded-3xl border border-line bg-panel">
-                <Image src={a.img} alt={a.alt} width={1200} height={900} sizes="(min-width: 768px) 33vw, 100vw" className="aspect-[4/3] w-full object-cover" />
+            {industries.map((ind) => (
+              <li key={ind.title} className="overflow-hidden rounded-3xl border border-line bg-panel">
+                <Image src={ind.img} alt={ind.alt} width={1200} height={900} sizes="(min-width: 768px) 33vw, 100vw" className="aspect-[4/3] w-full object-cover" />
                 <div className="p-6">
-                  <h3 className="text-lg font-semibold">{a.title}</h3>
-                  <p className="mt-2 leading-7 text-muted">{a.body}</p>
+                  <h3 className="text-lg font-semibold">{ind.title}</h3>
+                  <p className="mt-2 leading-7 text-muted">{ind.body}</p>
+                  <ul className="mt-5 flex flex-wrap gap-2" aria-label={`Produk untuk ${ind.title}`}>
+                    {ind.picks.map((slug) => {
+                      const p = bySlug(slug);
+                      const chip = (
+                        <>
+                          <ProductIcon product={p} size={20} />
+                          {p.name}
+                        </>
+                      );
+                      return (
+                        <li key={slug}>
+                          {p.href ? (
+                            <Link href={p.href} className="inline-flex items-center gap-2 rounded-full border border-tide-1/30 py-1 pl-1 pr-3 text-xs font-medium text-fg hover:border-tide-1/60">{chip}</Link>
+                          ) : (
+                            <span className="inline-flex items-center gap-2 rounded-full border border-line py-1 pl-1 pr-3 text-xs text-muted">{chip}</span>
+                          )}
+                        </li>
+                      );
+                    })}
+                  </ul>
                 </div>
               </li>
             ))}
@@ -145,36 +150,53 @@ export default function Home() {
         </div>
       </section>
 
-      {/* HARGA */}
-      <section id="harga" aria-labelledby="harga-judul" className="border-t border-line">
-        <div className="mx-auto grid max-w-page gap-12 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-2 lg:items-center">
+      {/* TENTANG */}
+      <section id="tentang" aria-labelledby="tentang-judul" className="border-t border-line">
+        <div className="mx-auto grid max-w-page gap-14 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-[1.3fr_1fr]">
           <div>
-            <h2 id="harga-judul" className="text-balance text-3xl font-semibold tracking-[-0.02em] sm:text-5xl">
-              Bayar hanya saat ada transaksi.
+            <h2 id="tentang-judul" className="text-balance text-3xl font-semibold tracking-[-0.02em] sm:text-5xl">
+              Tentang TapHub
             </h2>
-            <p className="mt-5 max-w-lg text-lg leading-8 text-muted">
-              Tanpa biaya pembelian alat. Kamu membayar per transaksi yang berhasil, jadi saat sepi biayanya ikut kecil.
-            </p>
+            <div className="mt-6 max-w-2xl space-y-5 text-lg leading-8 text-muted">
+              <p>
+                Banyak usaha di Indonesia masih mencatat pesanan di kertas, menghitung stok dengan perkiraan, dan merekap keuangan di akhir bulan. Software yang ada sering terlalu rumit atau terlalu mahal untuk usaha kecil.
+              </p>
+              <p>
+                TapHub hadir untuk mengubah itu: rangkaian aplikasi yang sederhana, terjangkau, dan saling terhubung, sehingga pemilik usaha bisa fokus melayani pelanggan.
+              </p>
+            </div>
+            <div className="mt-10 grid gap-8 sm:grid-cols-2">
+              <div>
+                <h3 className="font-semibold">Visi</h3>
+                <p className="mt-2 leading-7 text-muted">Menjadi ekosistem software pilihan usaha kecil dan menengah di Indonesia.</p>
+              </div>
+              <div>
+                <h3 className="font-semibold">Misi</h3>
+                <ul className="mt-2 space-y-2 leading-7 text-muted">
+                  {missions.map((m) => (
+                    <li key={m} className="flex gap-3">
+                      <span aria-hidden="true" className="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-tide-1" />
+                      {m}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
-          <div className="relative rounded-[28px] border border-tide-1/30 bg-gradient-to-b from-tide-2/[0.14] via-panel to-panel p-7 shadow-[0_0_80px_-30px_rgba(27,91,255,0.8)] sm:p-9">
-            <p className="font-semibold">TapOrder</p>
-            <p className="mt-4 flex items-baseline gap-2">
-              <span className="text-tide text-6xl font-semibold tracking-[-0.03em] tabular-nums">Rp599</span>
-              <span className="text-muted">per transaksi</span>
-            </p>
-            <ul className="mt-8 space-y-3">
-              {pricingPoints.map((p) => (
-                <li key={p} className="flex gap-3 leading-7">
-                  <svg className="mt-1.5 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38C8F8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7" /></svg>
-                  <span>{p}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-6 text-sm leading-6 text-muted">
-              Biaya metode pembayaran (misalnya QRIS) mengikuti tarif payment gateway dan ditampilkan terpisah.
-            </p>
-            <Link href="/#kontak" className="btn-tide mt-8 w-full">Daftar program pilot</Link>
-          </div>
+          <dl className="self-start rounded-[28px] border border-line bg-panel p-7 sm:p-8">
+            {[
+              ["Perusahaan", site.company.legalName],
+              ["Berdiri", "2026"],
+              ["Kantor", "Jakarta Selatan, DKI Jakarta"],
+              ["Fokus", "Software untuk usaha kecil dan menengah"],
+              ["Produk pertama", "TapOrder (program pilot)"],
+            ].map(([k, v], i) => (
+              <div key={k} className={`flex flex-col gap-1 py-4 sm:flex-row sm:justify-between sm:gap-6 ${i > 0 ? "border-t border-line" : "pt-0"}`}>
+                <dt className="text-sm text-muted">{k}</dt>
+                <dd className="font-medium sm:text-right">{v}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 
@@ -191,19 +213,8 @@ export default function Home() {
               .
             </p>
           </div>
-          <div className="divide-y divide-line border-y border-line">
-            {faqs.map((f) => (
-              <details key={f.q} className="group py-5">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-left font-medium [&::-webkit-details-marker]:hidden">
-                  {f.q}
-                  <span aria-hidden="true" className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-line text-muted transition group-open:rotate-45 group-open:border-tide-1/50 group-open:text-tide-1">+</span>
-                </summary>
-                <p className="mt-3 max-w-prose leading-7 text-muted">{f.a}</p>
-              </details>
-            ))}
-          </div>
+          <FaqList items={companyFaqs} />
         </div>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       </section>
 
       {/* KONTAK */}
@@ -212,15 +223,21 @@ export default function Home() {
         <div className="mx-auto grid max-w-page gap-12 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-[1fr_1.3fr]">
           <div>
             <h2 id="kontak-judul" className="text-balance text-3xl font-semibold tracking-[-0.02em] sm:text-5xl">
-              Coba TapOrder di usahamu.
+              Ceritakan usahamu ke kami.
             </h2>
             <p className="mt-5 max-w-md text-lg leading-8 text-muted">
-              Isi formulir, lalu kami hubungi lewat WhatsApp untuk mengatur pemasangan dan QR meja.
+              Kami bantu pilih produk TapHub yang paling sesuai. Isi formulir, lalu kami balas lewat WhatsApp.
             </p>
-            <p className="mt-8 text-sm text-muted">
-              Atau email ke{" "}
-              <a href={`mailto:${site.email}`} className="text-fg underline underline-offset-4">{site.email}</a>
-            </p>
+            <dl className="mt-10 space-y-4 text-sm">
+              <div>
+                <dt className="text-muted">Email</dt>
+                <dd className="mt-1"><a href={`mailto:${site.email}`} className="underline underline-offset-4">{site.email}</a></dd>
+              </div>
+              <div>
+                <dt className="text-muted">Kantor</dt>
+                <dd className="mt-1 leading-6">{site.company.address.join(", ")}</dd>
+              </div>
+            </dl>
           </div>
           <div className="rounded-[28px] border border-line bg-panel/80 p-6 backdrop-blur sm:p-8">
             <ContactForm />

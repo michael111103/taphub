@@ -26,7 +26,7 @@ export default function Footer() {
           <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 text-sm text-muted lg:grid-cols-1">
             {products.slice(0, 6).map((p) => (
               <li key={p.slug}>
-                <Link href={p.slug === "taporder" ? "/#taporder" : "/#produk"} className="hover:text-fg">
+                <Link href={p.href ?? "/#produk"} className="hover:text-fg">
                   {p.name}
                 </Link>
               </li>
@@ -37,8 +37,10 @@ export default function Footer() {
         <nav aria-label="Perusahaan">
           <h2 className="text-sm font-semibold">TapHub</h2>
           <ul className="mt-4 space-y-3 text-sm text-muted">
-            <li><Link href="/#harga" className="hover:text-fg">Harga</Link></li>
+            <li><Link href="/#tentang" className="hover:text-fg">Tentang kami</Link></li>
+            <li><Link href="/#industri" className="hover:text-fg">Solusi</Link></li>
             <li><Link href="/#faq" className="hover:text-fg">FAQ</Link></li>
+            <li><Link href="/#kontak" className="hover:text-fg">Kontak</Link></li>
             <li><Link href="/kebijakan-privasi" className="hover:text-fg">Kebijakan Privasi</Link></li>
             <li><Link href="/syarat-ketentuan" className="hover:text-fg">Syarat &amp; Ketentuan</Link></li>
           </ul>

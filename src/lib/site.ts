@@ -2,9 +2,9 @@
 export const site = {
   name: "TapHub",
   url: "https://taphub.id",
-  tagline: "Software untuk menjalankan usaha di Indonesia",
+  tagline: "Software yang saling terhubung untuk usaha Indonesia",
   description:
-    "TapHub membuat software untuk usaha Indonesia. Mulai dari TapOrder: pelanggan scan QR di meja, pesan, dan bayar sendiri, pesanan langsung masuk ke kasir.",
+    "TapHub adalah ekosistem software untuk usaha Indonesia: TapOrder, TapPOS, TapBooks, TapInvoice, dan lainnya untuk penjualan, keuangan, operasional, dan gaya hidup.",
   email: "halo@taphub.id",
   // Format internasional tanpa tanda +, dipakai untuk link WhatsApp
   whatsapp: "6281281321903",

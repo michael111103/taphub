@@ -1,7 +1,38 @@
-export const faqs = [
+export type Faq = { q: string; a: string };
+
+/** FAQ umum di beranda (company profile TapHub) */
+export const companyFaqs: Faq[] = [
   {
     q: "Apa itu TapHub?",
-    a: "TapHub adalah kumpulan software untuk menjalankan usaha di Indonesia. Produk pertama kami TapOrder, untuk pemesanan dan pembayaran lewat scan QR di cafe dan restoran. Produk lain seperti TapPOS, TapBooks, dan TapInvoice sedang kami siapkan.",
+    a: "TapHub adalah ekosistem software untuk menjalankan usaha di Indonesia: penjualan, keuangan, operasional, dan gaya hidup. Setiap produk Tap bisa dipakai sendiri atau digabung sesuai kebutuhan usahamu.",
+  },
+  {
+    q: "Siapa perusahaan di balik TapHub?",
+    a: "TapHub dikembangkan dan dikelola oleh PT Bara Karbon Internasional, perseroan yang berkedudukan di Jakarta Selatan.",
+  },
+  {
+    q: "Produk apa yang sudah bisa dipakai?",
+    a: "TapOrder, aplikasi pemesanan dan pembayaran lewat scan QR untuk cafe dan restoran, sedang membuka program pilot. Produk lain seperti TapPOS, TapBooks, dan TapInvoice sedang kami siapkan dan dirilis bertahap.",
+  },
+  {
+    q: "Apakah harus memakai semua produk Tap?",
+    a: "Tidak. Kamu bisa mulai dari satu produk saja. Produk lain bisa ditambahkan saat usahamu membutuhkannya.",
+  },
+  {
+    q: "Bagaimana TapHub menangani pembayaran?",
+    a: "Pembayaran diproses oleh payment gateway berlisensi dan masuk ke saldo akun usahamu sendiri, bukan ke rekening TapHub.",
+  },
+  {
+    q: "Bagaimana cara menghubungi TapHub?",
+    a: "Lewat WhatsApp atau email yang tercantum di bagian kontak. Tim kami akan membantu memilih produk yang sesuai untuk usahamu.",
+  },
+];
+
+/** FAQ khusus landing page TapOrder */
+export const taporderFaqs: Faq[] = [
+  {
+    q: "Apa itu TapOrder?",
+    a: "TapOrder adalah aplikasi pemesanan lewat scan QR untuk cafe dan restoran. Pelanggan scan QR di meja, memilih menu, dan membayar dari HP. Pesanan langsung masuk ke dashboard kasir dan dapur lengkap dengan nomor meja.",
   },
   {
     q: "Apakah pelanggan perlu install aplikasi?",
@@ -20,7 +51,7 @@ export const faqs = [
     a: "Rp599 per transaksi yang berhasil dibayar. Biaya metode pembayaran (misalnya QRIS) mengikuti tarif payment gateway dan ditampilkan terpisah. Hubungi kami untuk detail program pilot.",
   },
   {
-    q: "Kapan produk Tap lainnya tersedia?",
-    a: "Kami merilis produk satu per satu, dimulai dari TapOrder. Tinggalkan kontakmu lewat formulir di bawah dan kami kabari saat produk yang kamu butuhkan siap.",
+    q: "Bagaimana kalau pelanggan mau bawa pulang?",
+    a: "Pasang QR di meja kasir untuk pesanan take away. Pesanan tetap masuk ke dashboard, ditandai sebagai take away.",
   },
 ];

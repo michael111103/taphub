@@ -9,7 +9,7 @@ const xs = [10, 30, 50, 70, 90]; // posisi horizontal (persen)
 
 export default function Ecosystem() {
   return (
-    <figure className="relative mx-auto w-full max-w-3xl">
+    <figure className="relative mx-auto w-full max-w-4xl">
       <div className="relative aspect-[800/360] w-full">
         <svg viewBox="0 0 800 360" className="absolute inset-0 h-full w-full" aria-hidden="true" preserveAspectRatio="none">
           <defs>
