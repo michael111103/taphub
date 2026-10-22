@@ -13,7 +13,7 @@ export default function CtaCard({
   cta?: string;
 }) {
   return (
-    <div className="relative isolate overflow-hidden rounded-[28px] border border-tide-1/30 bg-gradient-to-br from-[#0A2A6B] via-[#0B1B45] to-[#070E22] px-6 pb-20 pt-10 sm:px-12 sm:pb-24 sm:pt-14">
+    <div className="theme-dark relative isolate overflow-hidden rounded-[28px] border border-tide-1/30 bg-gradient-to-br from-[#0A2A6B] via-[#0B1B45] to-[#070E22] px-6 pb-20 pt-10 sm:px-12 sm:pb-24 sm:pt-14">
       {/* cahaya */}
       <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-24 -z-10 h-80 w-80 rounded-full bg-tide-1/25 blur-[90px]" />
       <div aria-hidden="true" className="pointer-events-none absolute -left-20 bottom-0 -z-10 h-64 w-64 rounded-full bg-tide-2/30 blur-[90px]" />

@@ -5,12 +5,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#04060A",
-        panel: "#0D1118",
-        raised: "#141A23",
-        line: "rgba(148, 163, 184, 0.14)",
-        fg: "#E8EDF5",
-        muted: "#8E98AA",
+        // Warna tema dari variabel CSS (lihat globals.css). Terang secara default,
+        // gelap di dalam elemen ber-class "theme-dark".
+        ink: "rgb(var(--ink) / <alpha-value>)",
+        panel: "rgb(var(--panel) / <alpha-value>)",
+        raised: "rgb(var(--raised) / <alpha-value>)",
+        line: "var(--line)",
+        fg: "rgb(var(--fg) / <alpha-value>)",
+        muted: "rgb(var(--muted) / <alpha-value>)",
+        accent: "rgb(var(--accent) / <alpha-value>)",
         tide: {
           1: "#38C8F8",
           2: "#1B5BFF",

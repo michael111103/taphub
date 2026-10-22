@@ -22,14 +22,14 @@ export default function Testimonials({ title, items }: { title: string; items: T
           {items.map((t) => (
             <li key={t.name + t.quote} className="flex flex-col rounded-3xl border border-line bg-panel p-6 transition hover:border-tide-1/40 sm:p-7">
               {t.rating ? (
-                <p className="text-tide-1" aria-label={`Rating ${t.rating} dari 5`}>
+                <p className="text-accent" aria-label={`Rating ${t.rating} dari 5`}>
                   {"★".repeat(t.rating)}
-                  <span className="text-white/15">{"★".repeat(5 - t.rating)}</span>
+                  <span className="text-fg/15">{"★".repeat(5 - t.rating)}</span>
                 </p>
               ) : null}
               <blockquote className="mt-4 flex-1 leading-7 text-fg/90">&ldquo;{t.quote}&rdquo;</blockquote>
               <div className="mt-6 flex items-center gap-3">
-                <span aria-hidden="true" className="grid h-11 w-11 place-items-center rounded-full bg-tide-2/15 text-sm font-semibold text-tide-1 ring-1 ring-tide-1/30">
+                <span aria-hidden="true" className="grid h-11 w-11 place-items-center rounded-full bg-tide-2/15 text-sm font-semibold text-accent ring-1 ring-tide-1/30">
                   {initials(t.name)}
                 </span>
                 <div>

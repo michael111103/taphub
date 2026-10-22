@@ -118,7 +118,7 @@ export default function Home() {
             <h2 id="faq-judul" className="text-3xl font-semibold tracking-[-0.02em] sm:text-5xl">FAQ seputar TapHub</h2>
             <p className="mt-5 leading-7 text-muted">
               Belum terjawab?{" "}
-              <a href={whatsappLink("Halo TapHub, saya mau bertanya.")} target="_blank" rel="noopener noreferrer" className="text-tide-1 underline underline-offset-4">
+              <a href={whatsappLink("Halo TapHub, saya mau bertanya.")} target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-4">
                 Tanya lewat WhatsApp
               </a>
               .

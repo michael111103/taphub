@@ -47,7 +47,7 @@ export default function ProductGrid() {
                 <ProductIcon product={p} />
                 <span
                   className={`rounded-full px-2.5 py-1 text-xs font-medium ${
-                    featured ? "bg-tide-2/15 text-tide-1 ring-1 ring-tide-1/30" : "bg-white/5 text-muted"
+                    featured ? "bg-tide-2/15 text-accent ring-1 ring-tide-1/30" : "bg-fg/5 text-muted"
                   }`}
                 >
                   {featured ? "Produk unggulan" : "Segera hadir"}
@@ -66,7 +66,7 @@ export default function ProductGrid() {
                   className="group block h-full rounded-3xl border border-tide-1/30 bg-gradient-to-b from-tide-2/[0.12] to-panel p-5 transition hover:border-tide-1/60"
                 >
                   {body}
-                  <span className="mt-4 inline-block text-sm font-semibold text-tide-1">Pelajari {p.name}</span>
+                  <span className="mt-4 inline-block text-sm font-semibold text-accent">Pelajari {p.name}</span>
                 </a>
               ) : (
                 <div className="h-full rounded-3xl border border-line bg-panel p-5">{body}</div>

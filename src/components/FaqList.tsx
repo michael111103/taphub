@@ -39,7 +39,7 @@ export default function FaqList({ items }: { items: Faq[] }) {
           <summary className="flex cursor-pointer list-none items-start gap-4 px-2 py-5 text-left font-medium sm:px-5 [&::-webkit-details-marker]:hidden">
             <svg
               aria-hidden="true"
-              className="mt-1 shrink-0 text-muted transition-transform duration-300 group-open:rotate-90 group-open:text-tide-1"
+              className="mt-1 shrink-0 text-muted transition-transform duration-300 group-open:rotate-90 group-open:text-accent"
               width="14"
               height="14"
               viewBox="0 0 24 24"

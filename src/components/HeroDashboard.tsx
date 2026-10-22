@@ -19,14 +19,14 @@ const tone: Record<string, string> = {
 export default function HeroDashboard() {
   return (
     <div
-      className="relative"
+      className="theme-dark relative"
       role="img"
       aria-label="Contoh tampilan dashboard kasir TapPOS: pesanan masuk dari meja, total penjualan hari ini, dan grafik penjualan mingguan."
     >
       {/* cahaya biru di belakang */}
       <div aria-hidden="true" className="pointer-events-none absolute -inset-x-10 -top-10 bottom-0 -z-10 rounded-full bg-[radial-gradient(closest-side,rgba(27,91,255,0.45),transparent)] blur-2xl" />
 
-      <div aria-hidden="true" className="overflow-hidden rounded-[22px] border border-line bg-panel/90 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)] [transform:perspective(1600px)_rotateX(6deg)] lg:[transform:perspective(1600px)_rotateY(-8deg)_rotateX(4deg)]">
+      <div aria-hidden="true" className="overflow-hidden rounded-[22px] border border-line bg-panel/90 shadow-[0_30px_80px_-24px_rgba(15,23,42,0.45)] [transform:perspective(1600px)_rotateX(6deg)] lg:[transform:perspective(1600px)_rotateY(-8deg)_rotateX(4deg)]">
         {/* top bar */}
         <div className="flex items-center justify-between gap-3 border-b border-line px-4 py-3">
           <div className="flex items-center gap-2 text-xs text-muted">

@@ -57,7 +57,7 @@ export default function ContactPage() {
           <ol className="mt-10 space-y-6">
             {steps.map((s, i) => (
               <li key={s.title} className="grid grid-cols-[2.5rem_1fr] gap-4">
-                <span className="grid h-10 w-10 place-items-center rounded-full border border-tide-1/40 bg-tide-2/10 text-sm font-semibold text-tide-1">
+                <span className="grid h-10 w-10 place-items-center rounded-full border border-tide-1/40 bg-tide-2/10 text-sm font-semibold text-accent">
                   {i + 1}
                 </span>
                 <div>

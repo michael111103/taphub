@@ -63,7 +63,9 @@ atau ganti nama filenya di `src/app/pos/page.tsx` (bagian `modules` dan `industr
 | `public/images/taphubpos6.png` | 1200×800 (3:2) | Usaha F&B |
 | `public/images/taphubpos7.png` | 1200×800 (3:2) | Retail & jasa |
 
-Logo: `public/taphub.png` (asli) dan `public/taphub-logo.png` (versi dipotong untuk header/footer).
+Logo: `public/whitelogo.png` (asli, tulisan Tap hitam) dipotong jadi `public/taphub-logo-dark.png` untuk latar terang (header). `public/taphub.png` (asli, tulisan Tap putih) dipotong jadi `public/taphub-logo.png` untuk latar gelap (footer).
+
+Tema warna: terang secara default. Bagian yang diberi class `theme-dark` (mockup dashboard, kartu konsultasi, footer) tetap gelap. Semua warna diatur di `src/app/globals.css`.
 Favicon dan gambar share (WhatsApp/sosmed) dibuat otomatis dari kode: `src/app/icon.tsx`, `src/app/apple-icon.tsx`, `src/app/opengraph-image.tsx`.
 
 ## Google Analytics

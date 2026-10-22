@@ -5,8 +5,32 @@
 @tailwind utilities;
 
 @layer base {
-  html {
+  /* Tema terang (default) */
+  :root {
+    --ink: 255 255 255; /* latar halaman */
+    --panel: 244 247 251; /* latar kartu */
+    --raised: 255 255 255; /* kartu di atas kartu */
+    --line: rgba(15, 23, 42, 0.1); /* garis tepi */
+    --fg: 11 18 32; /* teks utama */
+    --muted: 84 95 115; /* teks sekunder */
+    --accent: 21 83 230; /* teks link / sorotan biru */
+  }
+
+  /* Bagian yang sengaja tetap gelap: mockup dashboard, kartu konsultasi, footer */
+  .theme-dark {
+    --ink: 4 6 10;
+    --panel: 13 17 24;
+    --raised: 20 26 35;
+    --line: rgba(148, 163, 184, 0.14);
+    --fg: 232 237 245;
+    --muted: 142 152 170;
+    --accent: 56 200 248;
+    color: rgb(var(--fg));
     color-scheme: dark;
+  }
+
+  html {
+    color-scheme: light;
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
   }
@@ -43,7 +67,7 @@
   }
 
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-line px-5 py-3 text-sm font-semibold text-fg transition hover:border-tide-1/50 hover:bg-white/[0.03];
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-line px-5 py-3 text-sm font-semibold text-fg transition hover:border-tide-1/50 hover:bg-fg/[0.04];
   }
 
   .text-tide {
@@ -68,7 +92,7 @@
     @apply mt-2 list-disc pl-5;
   }
   .prose-legal a {
-    @apply text-tide-1 underline underline-offset-4;
+    @apply text-accent underline underline-offset-4;
   }
 }
 

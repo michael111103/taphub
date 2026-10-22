@@ -145,9 +145,9 @@ const jsonLd = [
 
 function Check() {
   return (
-    <svg className="mt-1 shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <circle cx="12" cy="12" r="10" stroke="#38C8F8" strokeOpacity="0.6" strokeWidth="1.5" />
-      <path d="M8 12.5l2.5 2.5L16 9.5" stroke="#38C8F8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <svg className="mt-1 shrink-0 text-accent" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.5" strokeWidth="1.5" />
+      <path d="M8 12.5l2.5 2.5L16 9.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -178,7 +178,7 @@ export default function TapPosPage() {
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_70%_20%,rgba(27,91,255,0.24),transparent_70%),radial-gradient(40%_40%_at_10%_0%,rgba(56,200,248,0.12),transparent_70%)]" />
         <div className="mx-auto grid max-w-page items-center gap-14 px-4 pb-20 pt-12 sm:px-6 sm:pt-20 lg:grid-cols-[1fr_1.1fr] lg:gap-10 lg:pb-28">
           <div>
-            <p className="inline-flex items-center gap-2 rounded-full border border-tide-1/30 bg-tide-2/10 px-3 py-1.5 text-xs font-medium text-tide-1 sm:text-sm">
+            <p className="inline-flex items-center gap-2 rounded-full border border-tide-1/30 bg-tide-2/10 px-3 py-1.5 text-xs font-medium text-accent sm:text-sm">
               Aplikasi point of sale (POS) untuk F&amp;B, retail, dan jasa
             </p>
             <h1 className="mt-6 text-balance text-[2.4rem] font-semibold leading-[1.05] tracking-[-0.03em] sm:text-6xl">
@@ -287,7 +287,7 @@ export default function TapPosPage() {
                       <li key={f} className="rounded-full bg-tide-2/10 px-3 py-1.5 text-sm text-fg ring-1 ring-tide-1/25">{f}</li>
                     ))}
                   </ul>
-                  <a href={whatsappLink(ind.ask)} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex text-sm font-semibold text-tide-1 underline underline-offset-4">
+                  <a href={whatsappLink(ind.ask)} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex text-sm font-semibold text-accent underline underline-offset-4">
                     Konsultasikan untuk usaha {ind.title}
                   </a>
                 </div>
@@ -310,7 +310,7 @@ export default function TapPosPage() {
             <h2 id="faq-judul" className="text-3xl font-semibold tracking-[-0.02em] sm:text-5xl">FAQ seputar TapPOS</h2>
             <p className="mt-5 leading-7 text-muted">
               Belum terjawab?{" "}
-              <a href={whatsappLink("Halo TapHub, saya mau bertanya soal TapPOS.")} target="_blank" rel="noopener noreferrer" className="text-tide-1 underline underline-offset-4">
+              <a href={whatsappLink("Halo TapHub, saya mau bertanya soal TapPOS.")} target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-4">
                 Tanya lewat WhatsApp
               </a>
               .

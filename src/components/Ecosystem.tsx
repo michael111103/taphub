@@ -23,7 +23,7 @@ export default function Ecosystem() {
             const d = `M400 92 C400 180, ${px} 160, ${px} 268`;
             return (
               <g key={i}>
-                <path d={d} fill="none" stroke="rgba(148,163,184,0.16)" strokeWidth="1.5" />
+                <path d={d} fill="none" stroke="rgba(100,116,139,0.28)" strokeWidth="1.5" />
                 <path
                   d={d}
                   fill="none"
@@ -39,8 +39,8 @@ export default function Ecosystem() {
         </svg>
 
         <div className="absolute left-1/2 top-[3%] -translate-x-1/2">
-          <div className="rounded-2xl border border-tide-1/30 bg-panel px-5 py-3 shadow-[0_0_60px_-10px_rgba(27,91,255,0.7)] sm:px-7 sm:py-4">
-            <Image src="/taphub-logo.png" alt="TapHub" width={898} height={197} className="h-5 w-auto sm:h-7" sizes="140px" />
+          <div className="rounded-2xl border border-tide-1/30 bg-raised px-5 py-3 shadow-[0_10px_50px_-12px_rgba(27,91,255,0.55)] sm:px-7 sm:py-4">
+            <Image src="/taphub-logo-dark.png" alt="TapHub" width={907} height={209} className="h-5 w-auto sm:h-7" sizes="140px" />
           </div>
         </div>
 

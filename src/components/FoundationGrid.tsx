@@ -99,7 +99,7 @@ function Card({ item }: { item: Item }) {
         aria-hidden="true"
         className="grid h-11 w-11 place-items-center rounded-2xl border border-tide-1/30 bg-tide-2/10 transition duration-300 group-hover:scale-110 group-hover:border-tide-1/60 group-hover:shadow-[0_0_24px_-4px_rgba(56,200,248,0.7)]"
       >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38C8F8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg className="text-accent" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d={item.icon} />
         </svg>
       </span>

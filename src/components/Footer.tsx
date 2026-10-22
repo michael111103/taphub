@@ -5,10 +5,10 @@ import { mainHref, site, whatsappLink } from "@/lib/site";
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="border-t border-line bg-ink">
+    <footer className="theme-dark border-t border-line bg-ink">
       <div className="mx-auto grid max-w-page gap-12 px-4 py-14 sm:px-6 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div className="max-w-sm">
-          <Logo className="h-7 w-auto" />
+          <Logo className="h-7 w-auto" variant="onDark" />
           <p className="mt-4 text-sm leading-6 text-muted">{site.tagline}.</p>
           <address className="mt-6 text-sm not-italic leading-6 text-muted">
             <span className="block font-medium text-fg">{site.company.legalName}</span>
