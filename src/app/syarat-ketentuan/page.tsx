@@ -5,7 +5,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Syarat & Ketentuan",
-  description: "Syarat dan ketentuan penggunaan website dan layanan TapHub, termasuk TapOrder.",
+  description: "Syarat dan ketentuan penggunaan website dan layanan TapHub, termasuk TapPOS.",
   alternates: { canonical: "/syarat-ketentuan" },
 };
 
@@ -19,7 +19,7 @@ export default function TermsPage() {
 
       <h2>Layanan</h2>
       <p>
-        TapHub menyediakan software berbasis web untuk usaha, termasuk TapOrder untuk pemesanan dan pembayaran lewat kode QR.
+        TapHub menyediakan software berbasis web untuk usaha, termasuk TapPOS untuk kasir, pesanan, stok, dan laporan penjualan.
         Fitur dan ketersediaan produk dapat berubah seiring pengembangan.
       </p>
 
@@ -33,7 +33,7 @@ export default function TermsPage() {
       <h2>Pembayaran dan biaya</h2>
       <ul>
         <li>Pembayaran pelanggan diproses oleh payment gateway berlisensi dan masuk ke saldo akun merchant, bukan ke rekening TapHub.</li>
-        <li>Biaya layanan TapOrder adalah Rp599 per transaksi berhasil, dipotong otomatis dari transaksi, kecuali disepakati lain secara tertulis.</li>
+        <li>Biaya layanan setiap produk mengikuti paket atau penawaran yang disepakati dengan TapHub.</li>
         <li>Biaya metode pembayaran mengikuti tarif payment gateway yang berlaku.</li>
         <li>Pengembalian dana (refund) kepada pelanggan menjadi tanggung jawab merchant sesuai kebijakan usahanya.</li>
       </ul>

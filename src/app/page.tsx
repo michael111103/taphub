@@ -47,7 +47,7 @@ export default function Home() {
               Produk TapHub
             </h2>
             <p className="mt-5 text-lg leading-8 text-muted">
-              Setiap produk menangani satu pekerjaan dengan baik. Kami merilisnya bertahap, dimulai dari TapOrder.
+              Setiap produk menangani satu pekerjaan dengan baik. Kami merilisnya bertahap, dimulai dari TapPOS.
             </p>
           </div>
           <div className="mt-12">

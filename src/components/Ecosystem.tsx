@@ -3,7 +3,7 @@ import ProductIcon from "./ProductIcon";
 import { products } from "@/lib/products";
 
 // Diagram: TapHub di tengah atas, garis bercahaya mengalir ke beberapa produk.
-const picks = ["taporder", "tappos", "tappay", "tapbooks", "tapstock"];
+const picks = ["tappos", "tappay", "tapbooks", "tapstock", "tapstaff"];
 const nodes = picks.map((slug) => products.find((p) => p.slug === slug)!);
 const xs = [10, 30, 50, 70, 90]; // posisi horizontal (persen)
 
@@ -59,7 +59,7 @@ export default function Ecosystem() {
         ))}
       </div>
       <figcaption className="sr-only">
-        Diagram ekosistem: TapHub menghubungkan TapOrder, TapPOS, TapPay, TapBooks, dan TapStock dalam satu akun.
+        Diagram ekosistem: TapHub menghubungkan TapPOS, TapPay, TapBooks, TapStock, dan TapStaff dalam satu akun.
       </figcaption>
     </figure>
   );

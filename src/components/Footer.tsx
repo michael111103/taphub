@@ -1,7 +1,6 @@
-import Link from "next/link";
 import Logo from "./Logo";
 import { products } from "@/lib/products";
-import { site, whatsappLink } from "@/lib/site";
+import { mainHref, site, whatsappLink } from "@/lib/site";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -26,9 +25,9 @@ export default function Footer() {
           <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 text-sm text-muted lg:grid-cols-1">
             {products.slice(0, 6).map((p) => (
               <li key={p.slug}>
-                <Link href={p.href ?? "/#produk"} className="hover:text-fg">
+                <a href={p.href ?? mainHref("/#produk")} className="hover:text-fg">
                   {p.name}
-                </Link>
+                </a>
               </li>
             ))}
           </ul>
@@ -37,12 +36,12 @@ export default function Footer() {
         <nav aria-label="Perusahaan">
           <h2 className="text-sm font-semibold">TapHub</h2>
           <ul className="mt-4 space-y-3 text-sm text-muted">
-            <li><Link href="/#tentang" className="hover:text-fg">Tentang kami</Link></li>
-            <li><Link href="/#keunggulan" className="hover:text-fg">Keunggulan</Link></li>
-            <li><Link href="/#faq" className="hover:text-fg">FAQ</Link></li>
-            <li><Link href="/hubungi-kami" className="hover:text-fg">Hubungi kami</Link></li>
-            <li><Link href="/kebijakan-privasi" className="hover:text-fg">Kebijakan Privasi</Link></li>
-            <li><Link href="/syarat-ketentuan" className="hover:text-fg">Syarat &amp; Ketentuan</Link></li>
+            <li><a href={mainHref("/#tentang")} className="hover:text-fg">Tentang kami</a></li>
+            <li><a href={mainHref("/#keunggulan")} className="hover:text-fg">Keunggulan</a></li>
+            <li><a href={mainHref("/#faq")} className="hover:text-fg">FAQ</a></li>
+            <li><a href={mainHref("/hubungi-kami")} className="hover:text-fg">Hubungi kami</a></li>
+            <li><a href={mainHref("/kebijakan-privasi")} className="hover:text-fg">Kebijakan Privasi</a></li>
+            <li><a href={mainHref("/syarat-ketentuan")} className="hover:text-fg">Syarat &amp; Ketentuan</a></li>
           </ul>
         </nav>
 

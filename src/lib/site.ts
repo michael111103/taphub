@@ -2,9 +2,11 @@
 export const site = {
   name: "TapHub",
   url: "https://taphub.id",
+  /** Domain landing page TapPOS (subdomain) */
+  posUrl: "https://pos.taphub.id",
   tagline: "Software yang saling terhubung untuk usaha Indonesia",
   description:
-    "TapHub adalah ekosistem software untuk usaha Indonesia: TapOrder, TapPOS, TapBooks, TapInvoice, dan lainnya untuk penjualan, keuangan, operasional, dan gaya hidup.",
+    "TapHub adalah ekosistem software untuk usaha Indonesia: TapPOS, TapBooks, TapInvoice, TapStock, dan lainnya untuk penjualan, keuangan, operasional, dan gaya hidup.",
   email: "halo@taphub.id",
   // Format internasional tanpa tanda +, dipakai untuk link WhatsApp
   whatsapp: "6281281321903",
@@ -25,4 +27,23 @@ export const site = {
 export function whatsappLink(text?: string) {
   const base = `https://wa.me/${site.whatsapp}`;
   return text ? `${base}?text=${encodeURIComponent(text)}` : base;
+}
+
+/**
+ * Link ke halaman situs utama (taphub.id).
+ * Di produksi isi env NEXT_PUBLIC_MAIN_URL=https://taphub.id supaya link dari pos.taphub.id
+ * tetap mengarah ke situs utama. Jika kosong, link relatif (berguna untuk preview Vercel).
+ */
+export function mainHref(path: string) {
+  const base = process.env.NEXT_PUBLIC_MAIN_URL ?? "";
+  return `${base}${path}`;
+}
+
+/**
+ * Link ke landing page TapPOS.
+ * Di produksi isi env NEXT_PUBLIC_POS_URL=https://pos.taphub.id. Jika kosong memakai /pos.
+ */
+export function posHref(hash = "") {
+  const base = process.env.NEXT_PUBLIC_POS_URL ?? "/pos";
+  return `${base}${hash}`;
 }

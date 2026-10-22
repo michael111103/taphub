@@ -14,15 +14,34 @@ npm run check-links  # cek link rusak (jalankan setelah npm run start)
 
 ## Struktur halaman
 
-| URL | Isi |
+| Alamat | Isi |
 | --- | --- |
-| `/` | Company profile TapHub: ekosistem, produk, keunggulan (kartu fondasi), tentang perusahaan, FAQ, kontak |
-| `/page/aplikasi-pemesanan-qr-cafe` | Landing page TapOrder (SEO sendiri: judul, deskripsi, gambar share, data terstruktur) |
-| `/kebijakan-privasi`, `/syarat-ketentuan` | Halaman legal |
+| `taphub.id` | Company profile TapHub: ekosistem, produk, keunggulan, tentang, FAQ, kartu konsultasi |
+| `pos.taphub.id` | Landing page TapPOS (kode di `src/app/pos/`), dengan sitemap dan robots sendiri |
+| `taphub.id/hubungi-kami` | Halaman konsultasi + formulir WhatsApp |
+| `taphub.id/kebijakan-privasi`, `taphub.id/syarat-ketentuan` | Halaman legal |
 
-Menambah landing page produk baru:
-1. Buat folder `src/app/page/<slug-kata-kunci>/` dengan `page.tsx` (contoh: salin folder TapOrder).
-2. Isi `href` produk di `src/lib/products.ts`. Kartu produk, footer, dan sitemap otomatis mengikuti.
+Pengaturan subdomain ada di `src/middleware.ts`:
+- `pos.taphub.id` menampilkan halaman `src/app/pos`.
+- `taphub.id/pos` dialihkan permanen ke `pos.taphub.id` supaya Google hanya mengindeks satu alamat.
+- Di preview Vercel (`*.vercel.app`) TapPOS tetap bisa dibuka di `/pos`.
+- Tes di komputer sendiri: `http://pos.localhost:3000`.
+
+## Menyambungkan domain di Vercel
+
+1. Vercel, buka project ini, Settings, Domains: tambahkan `taphub.id`, `www.taphub.id`, dan `pos.taphub.id`.
+2. Di pengelola DNS domain, ikuti record yang diminta Vercel (biasanya A record untuk `taphub.id` dan CNAME `cname.vercel-dns.com` untuk `www` dan `pos`).
+3. Settings, Environment Variables (Production), lalu redeploy:
+   - `NEXT_PUBLIC_MAIN_URL` = `https://taphub.id`
+   - `NEXT_PUBLIC_POS_URL` = `https://pos.taphub.id`
+
+   Tanpa dua variabel ini, link antar `taphub.id` dan `pos.taphub.id` tidak akan benar.
+4. Google Search Console: daftarkan `taphub.id` dan `pos.taphub.id`, lalu kirim sitemap masing-masing (`/sitemap.xml`).
+
+## Testimoni
+
+Bagian testimoni di halaman TapPOS otomatis tersembunyi selama `src/lib/testimonials.ts` kosong.
+Isi dengan testimoni asli (dengan izin pengguna), maka bagian itu muncul sendiri.
 
 ## Data yang perlu dicek
 
@@ -31,13 +50,18 @@ Daftar produk Tap ada di `src/lib/products.ts`, FAQ di `src/lib/faq.ts`.
 
 ## Gambar yang perlu diganti
 
-File di bawah masih gambar sementara. Timpa dengan foto asli **dengan nama dan rasio yang sama**:
+File di bawah masih gambar sementara. Timpa dengan gambar asli **dengan nama dan rasio yang sama**,
+atau ganti nama filenya di `src/app/pos/page.tsx` (bagian `modules` dan `industries`) lalu perbarui teks `alt`:
 
 | File | Ukuran | Isi |
 | --- | --- | --- |
-| `public/images/taporder-scan.jpg` | 1000×1250 (4:5) | Pelanggan scan QR di meja |
-
-Kalau nama file diganti, ubah juga di `src/app/page/aplikasi-pemesanan-qr-cafe/page.tsx`, dan perbarui teks `alt` supaya sesuai isi foto.
+| `public/images/taphubpos1.png` | 1200×900 (4:3) | Kasir & manajemen pesanan |
+| `public/images/taphubpos2.png` | 1200×900 (4:3) | Dashboard multicabang |
+| `public/images/taphubpos3.png` | 1200×900 (4:3) | Laporan & analisis bisnis |
+| `public/images/taphubpos4.png` | 1200×900 (4:3) | Promo & loyalitas pelanggan |
+| `public/images/taphubpos5.png` | 1200×900 (4:3) | Produk & stok |
+| `public/images/taphubpos6.png` | 1200×800 (3:2) | Usaha F&B |
+| `public/images/taphubpos7.png` | 1200×800 (3:2) | Retail & jasa |
 
 Logo: `public/taphub.png` (asli) dan `public/taphub-logo.png` (versi dipotong untuk header/footer).
 Favicon dan gambar share (WhatsApp/sosmed) dibuat otomatis dari kode: `src/app/icon.tsx`, `src/app/apple-icon.tsx`, `src/app/opengraph-image.tsx`.
@@ -51,8 +75,8 @@ Analytics hanya aktif setelah pengunjung menekan "Setuju" di banner cookie.
 
 1. Privacy policy: `/kebijakan-privasi`
 2. Terms page: `/syarat-ketentuan`
-3. CTA jelas: "Chat lewat WhatsApp" di beranda, "Daftar program pilot" di landing page TapOrder, "Hubungi kami" di header
-4. FAQ: FAQ umum di beranda dan FAQ TapOrder di landing page, keduanya dengan data terstruktur FAQPage
+3. CTA jelas: "Chat lewat WhatsApp" dan "Konsultasi sekarang" di beranda, "WhatsApp sales" dan "Jadwalkan demo" di TapPOS, "Hubungi kami" di header
+4. FAQ: FAQ umum di beranda dan FAQ TapPOS di pos.taphub.id, keduanya dengan data terstruktur FAQPage
 5. robots.txt: `src/app/robots.ts`
 6. sitemap.xml: `src/app/sitemap.ts`
 7. Custom 404: `src/app/not-found.tsx`

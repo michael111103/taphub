@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { readConsent, writeConsent } from "@/lib/consent";
+import { mainHref } from "@/lib/site";
 
 export default function CookieConsent() {
   const [show, setShow] = useState(false);
@@ -27,7 +27,7 @@ export default function CookieConsent() {
     >
       <p className="text-xs leading-5 text-muted sm:text-sm sm:leading-6">
         Kami memakai cookie analitik hanya jika kamu setuju.{" "}
-        <Link href="/kebijakan-privasi" className="text-fg underline underline-offset-4">Kebijakan Privasi</Link>
+        <a href={mainHref("/kebijakan-privasi")} className="text-fg underline underline-offset-4">Kebijakan Privasi</a>
       </p>
       <div className="flex shrink-0 gap-2">
         <button type="button" className="btn-tide flex-1 !px-4 !py-2 sm:flex-none" onClick={() => choose("accepted")}>Setuju</button>

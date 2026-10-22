@@ -1,10 +1,10 @@
-import Link from "next/link";
+import { mainHref } from "@/lib/site";
 
 // Kartu ajakan konsultasi, dipakai di akhir halaman.
 export default function CtaCard({
   title = "Siap membawa usahamu ke langkah berikutnya?",
   body = "Kurangi kerja manual, pantau usaha dari mana saja, dan ambil keputusan lebih cepat bersama TapHub.",
-  href = "/hubungi-kami",
+  href = mainHref("/hubungi-kami"),
   cta = "Konsultasi sekarang",
 }: {
   title?: string;
@@ -21,12 +21,12 @@ export default function CtaCard({
       <div className="relative max-w-2xl">
         <h2 className="text-balance text-3xl font-semibold tracking-[-0.02em] text-white sm:text-5xl">{title}</h2>
         <p className="mt-4 max-w-xl text-lg leading-8 text-white/75">{body}</p>
-        <Link
+        <a
           href={href}
           className="mt-8 inline-flex items-center justify-center rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-ink shadow-[0_10px_30px_-10px_rgba(56,200,248,0.8)] transition hover:-translate-y-0.5 hover:shadow-[0_14px_40px_-10px_rgba(56,200,248,0.9)]"
         >
           {cta}
-        </Link>
+        </a>
       </div>
 
       {/* gelombang dekoratif di bawah kartu */}

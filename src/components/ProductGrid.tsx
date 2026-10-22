@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import ProductIcon from "./ProductIcon";
 import { categories, products, type ProductCategory } from "@/lib/products";
 
@@ -41,17 +40,17 @@ export default function ProductGrid() {
 
       <ul id="daftar-produk" role="tabpanel" className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {list.map((p) => {
-          const pilot = p.status === "pilot";
+          const featured = p.status === "featured";
           const body = (
             <>
               <div className="flex items-start justify-between gap-3">
                 <ProductIcon product={p} />
                 <span
                   className={`rounded-full px-2.5 py-1 text-xs font-medium ${
-                    pilot ? "bg-tide-2/15 text-tide-1 ring-1 ring-tide-1/30" : "bg-white/5 text-muted"
+                    featured ? "bg-tide-2/15 text-tide-1 ring-1 ring-tide-1/30" : "bg-white/5 text-muted"
                   }`}
                 >
-                  {pilot ? "Program pilot" : "Segera hadir"}
+                  {featured ? "Produk unggulan" : "Segera hadir"}
                 </span>
               </div>
               <h3 className="mt-4 text-lg font-semibold sm:mt-5">{p.name}</h3>
@@ -62,13 +61,13 @@ export default function ProductGrid() {
           return (
             <li key={p.slug}>
               {p.href ? (
-                <Link
+                <a
                   href={p.href}
                   className="group block h-full rounded-3xl border border-tide-1/30 bg-gradient-to-b from-tide-2/[0.12] to-panel p-5 transition hover:border-tide-1/60"
                 >
                   {body}
                   <span className="mt-4 inline-block text-sm font-semibold text-tide-1">Pelajari {p.name}</span>
-                </Link>
+                </a>
               ) : (
                 <div className="h-full rounded-3xl border border-line bg-panel p-5">{body}</div>
               )}

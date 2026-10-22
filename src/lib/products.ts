@@ -1,8 +1,7 @@
-export type ProductCategory = "Penjualan" | "Keuangan" | "Operasional" | "Gaya hidup";
-export type ProductStatus = "pilot" | "soon";
+import { posHref } from "./site";
 
-/** Landing page TapOrder. Slug memakai kata kunci yang dicari orang di Google. */
-export const TAPORDER_PATH = "/page/aplikasi-pemesanan-qr-cafe";
+export type ProductCategory = "Penjualan" | "Keuangan" | "Operasional" | "Gaya hidup";
+export type ProductStatus = "featured" | "soon";
 
 export type Product = {
   slug: string;
@@ -22,22 +21,13 @@ export const categories: ProductCategory[] = ["Penjualan", "Keuangan", "Operasio
 
 export const products: Product[] = [
   {
-    slug: "taporder",
-    name: "TapOrder",
-    href: TAPORDER_PATH,
-    summary: "Pelanggan scan QR di meja, pesan, dan bayar sendiri. Pesanan langsung masuk ke kasir dan dapur.",
-    category: "Penjualan",
-    status: "pilot",
-    hue: ["#38C8F8", "#1B5BFF"],
-    icon: "M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 14h2v2h-2zM14 18h2v2h-2zM18 18h2v2h-2z",
-  },
-  {
     slug: "tappos",
     name: "TapPOS",
-    summary: "Kasir untuk mencatat penjualan di counter, lengkap dengan struk dan laporan harian.",
+    href: posHref(),
+    summary: "Aplikasi kasir untuk F&B, retail, dan jasa: pesanan, multicabang, stok, promo, dan laporan dalam satu sistem.",
     category: "Penjualan",
-    status: "soon",
-    hue: ["#22D3EE", "#0891B2"],
+    status: "featured",
+    hue: ["#38C8F8", "#1B5BFF"],
     icon: "M4 5h16v10H4zM8 19h8M12 15v4M7 9h4",
   },
   {

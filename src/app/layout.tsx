@@ -19,7 +19,6 @@ export const metadata: Metadata = {
     "software bisnis Indonesia",
     "software UMKM",
     "aplikasi usaha",
-    "TapOrder",
     "TapPOS",
     "TapBooks",
   ],

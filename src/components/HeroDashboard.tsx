@@ -1,4 +1,4 @@
-// Mockup dashboard kasir TapOrder. Murni HTML + CSS (tanpa gambar), jadi tajam dan ringan.
+// Mockup dashboard kasir TapPOS. Murni HTML + CSS (tanpa gambar), jadi tajam dan ringan.
 // Animasi: pesanan baru dari "Meja 7" masuk berulang, grafik naik saat halaman dibuka.
 
 const bars = [38, 52, 44, 70, 58, 86, 64];
@@ -21,7 +21,7 @@ export default function HeroDashboard() {
     <div
       className="relative"
       role="img"
-      aria-label="Contoh tampilan dashboard kasir TapOrder: pesanan masuk dari meja, total penjualan hari ini, dan grafik penjualan mingguan."
+      aria-label="Contoh tampilan dashboard kasir TapPOS: pesanan masuk dari meja, total penjualan hari ini, dan grafik penjualan mingguan."
     >
       {/* cahaya biru di belakang */}
       <div aria-hidden="true" className="pointer-events-none absolute -inset-x-10 -top-10 bottom-0 -z-10 rounded-full bg-[radial-gradient(closest-side,rgba(27,91,255,0.45),transparent)] blur-2xl" />

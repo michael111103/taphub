@@ -15,7 +15,7 @@ export default function PrivacyPage() {
       <p>
         Kebijakan ini menjelaskan bagaimana {site.company.legalName} (&ldquo;TapHub&rdquo;, &ldquo;kami&rdquo;) mengumpulkan,
         memakai, menyimpan, dan melindungi data pribadi saat kamu memakai website {site.url.replace("https://", "")} dan
-        layanan TapHub, termasuk TapOrder. Kami mengelola data pribadi dengan mengacu pada Undang-Undang Nomor 27 Tahun 2022
+        layanan TapHub, termasuk TapPOS. Kami mengelola data pribadi dengan mengacu pada Undang-Undang Nomor 27 Tahun 2022
         tentang Pelindungan Data Pribadi.
       </p>
 

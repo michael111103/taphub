@@ -1,16 +1,15 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import Logo from "./Logo";
-import { TAPORDER_PATH } from "@/lib/products";
+import { mainHref, posHref } from "@/lib/site";
 
 const nav = [
-  { href: "/#produk", label: "Produk" },
-  { href: TAPORDER_PATH, label: "TapOrder" },
-  { href: "/#keunggulan", label: "Keunggulan" },
-  { href: "/#tentang", label: "Tentang" },
-  { href: "/#faq", label: "FAQ" },
+  { href: mainHref("/#produk"), label: "Produk" },
+  { href: posHref(), label: "TapPOS" },
+  { href: mainHref("/#keunggulan"), label: "Keunggulan" },
+  { href: mainHref("/#tentang"), label: "Tentang" },
+  { href: mainHref("/#faq"), label: "FAQ" },
 ];
 
 export default function Header() {
@@ -44,18 +43,18 @@ export default function Header() {
           <ul className="flex items-center gap-8 text-sm text-muted">
             {nav.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="transition hover:text-fg">
+                <a href={item.href} className="transition hover:text-fg">
                   {item.label}
-                </Link>
+                </a>
               </li>
             ))}
           </ul>
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link href="/hubungi-kami" className="btn-tide hidden !py-2.5 sm:inline-flex">
+          <a href={mainHref("/hubungi-kami")} className="btn-tide hidden !py-2.5 sm:inline-flex">
             Hubungi kami
-          </Link>
+          </a>
           <button
             type="button"
             className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line md:hidden"
@@ -80,20 +79,20 @@ export default function Header() {
           <ul className="divide-y divide-line">
             {nav.map((item) => (
               <li key={item.href}>
-                <Link
+                <a
                   href={item.href}
                   className="flex items-center justify-between py-4 text-lg font-medium"
                   onClick={() => setOpen(false)}
                 >
                   {item.label}
-                </Link>
+                </a>
               </li>
             ))}
           </ul>
         </nav>
-        <Link href="/hubungi-kami" className="btn-tide mt-6 w-full" onClick={() => setOpen(false)}>
+        <a href={mainHref("/hubungi-kami")} className="btn-tide mt-6 w-full" onClick={() => setOpen(false)}>
           Hubungi kami
-        </Link>
+        </a>
       </div>
     </header>
   );
