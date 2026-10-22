@@ -42,6 +42,10 @@ const config: Config = {
         flow: {
           to: { strokeDashoffset: "-200" },
         },
+        "fade-in": {
+          from: { opacity: "0", transform: "translateY(6px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
         slide: {
           from: { left: "2rem" },
           to: { left: "calc(100% - 4.5rem)" },
@@ -52,6 +56,7 @@ const config: Config = {
         ping: "ping 1.6s ease-out infinite",
         "bar-grow": "bar-grow 1.1s cubic-bezier(.2,.8,.2,1) both",
         flow: "flow 3.2s linear infinite",
+        "fade-in": "fade-in .35s ease-out both",
       },
     },
   },
