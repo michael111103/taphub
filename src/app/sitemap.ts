@@ -1,0 +1,11 @@
+import type { MetadataRoute } from "next";
+import { site } from "@/lib/site";
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const now = new Date();
+  return [
+    { url: `${site.url}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },
+    { url: `${site.url}/kebijakan-privasi`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${site.url}/syarat-ketentuan`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
+  ];
+}

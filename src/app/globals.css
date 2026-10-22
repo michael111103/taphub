@@ -1,3 +1,84 @@
+@import "@fontsource-variable/plus-jakarta-sans";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-ink text-fg font-sans antialiased;
+    font-feature-settings: "ss01";
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-tide-1 ring-offset-2 ring-offset-ink;
+  }
+
+  [id] {
+    scroll-margin-top: 5.5rem;
+  }
+}
+
+@layer components {
+  .btn-tide {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white transition;
+    background-image: linear-gradient(135deg, #38c8f8 0%, #1b5bff 100%);
+    box-shadow:
+      0 0 0 1px rgba(56, 200, 248, 0.35) inset,
+      0 8px 28px -6px rgba(27, 91, 255, 0.65);
+  }
+  .btn-tide:hover {
+    box-shadow:
+      0 0 0 1px rgba(56, 200, 248, 0.6) inset,
+      0 10px 36px -4px rgba(56, 200, 248, 0.6);
+  }
+  .btn-tide:active {
+    transform: translateY(1px);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-line px-5 py-3 text-sm font-semibold text-fg transition hover:border-tide-1/50 hover:bg-white/[0.03];
+  }
+
+  .text-tide {
+    background-image: linear-gradient(180deg, #38c8f8 0%, #1b5bff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .surface {
+    @apply border border-line bg-panel;
+  }
+
+  .prose-legal h2 {
+    @apply mt-10 text-xl font-semibold text-fg;
+  }
+  .prose-legal p,
+  .prose-legal li {
+    @apply mt-3 leading-7 text-muted;
+  }
+  .prose-legal ul {
+    @apply mt-2 list-disc pl-5;
+  }
+  .prose-legal a {
+    @apply text-tide-1 underline underline-offset-4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
