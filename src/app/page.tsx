@@ -1,15 +1,7 @@
-import HeroSection from "@/components/HeroSection";
-import AboutSection from "@/components/AboutSection";
-import ProductSection from "@/components/ProductSection";
-import WarehouseSection from "@/components/WarehouseSection";
-
 export default function Home() {
   return (
-    <>
-      <HeroSection />
-      <AboutSection />
-      <ProductSection />
-      <WarehouseSection />
-    </>
+    <main className="flex min-h-screen items-center justify-center">
+      <h1 className="text-3xl font-bold">TapHub</h1>
+    </main>
   );
 }
