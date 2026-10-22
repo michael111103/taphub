@@ -92,11 +92,7 @@ export default function TapOrderPage() {
         </div>
         <div className="mx-auto grid max-w-page items-center gap-14 px-4 pb-20 pt-10 sm:px-6 sm:pt-16 lg:grid-cols-[1fr_1.15fr] lg:gap-10 lg:pb-28">
           <div>
-            <p className="inline-flex items-center gap-2 rounded-full border border-line bg-panel px-3 py-1.5 text-xs text-muted">
-              <span className="h-1.5 w-1.5 rounded-full bg-tide-1" />
-              TapOrder sedang membuka program pilot
-            </p>
-            <h1 className="mt-6 text-balance text-[2.5rem] font-semibold leading-[1.05] tracking-[-0.03em] sm:text-6xl">
+            <h1 className="text-balance text-[2.5rem] font-semibold leading-[1.05] tracking-[-0.03em] sm:text-6xl">
               Aplikasi pemesanan scan QR untuk cafe dan restoran.
             </h1>
             <p className="mt-6 max-w-xl text-pretty text-lg leading-8 text-muted">
