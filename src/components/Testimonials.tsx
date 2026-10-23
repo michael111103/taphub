@@ -34,7 +34,7 @@ export default function Testimonials({ title, items }: { title: string; items: T
                 </span>
                 <div>
                   <p className="font-semibold">{t.name}</p>
-                  <p className="text-sm text-muted">{t.role}, {t.city}</p>
+                  <p className="text-sm text-muted">{[t.role, t.city].filter(Boolean).join(", ")}</p>
                 </div>
               </div>
             </li>

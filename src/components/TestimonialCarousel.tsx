@@ -15,8 +15,8 @@ function initials(name: string) {
 }
 
 /**
- * Carousel testimoni: berganti otomatis dengan efek fade, berhenti saat disentuh/di-hover,
- * bisa digeser (swipe) di HP, punya tombol sebelumnya/berikutnya dan titik navigasi.
+ * Carousel testimoni: berganti otomatis dengan efek fade (mulai jalan saat ada 2 testimoni atau lebih),
+ * berhenti sebentar saat disentuh/di-hover, bisa digeser (swipe) di HP, dan punya titik navigasi.
  * Jika pengunjung mengaktifkan "kurangi gerakan", carousel tidak berjalan otomatis.
  */
 export default function TestimonialCarousel({
@@ -83,35 +83,6 @@ export default function TestimonialCarousel({
           <h2 id={`${id}-judul`} className="text-balance text-3xl font-semibold tracking-[-0.02em] sm:text-5xl">{title}</h2>
           {description && <p className="mt-5 max-w-md text-lg leading-8 text-muted">{description}</p>}
 
-          {count > 1 && (
-            <div className="mt-8 flex items-center gap-3">
-              <button
-                type="button"
-                onClick={() => go(index - 1)}
-                aria-label="Testimoni sebelumnya"
-                className="grid h-11 w-11 place-items-center rounded-full border border-line bg-raised transition hover:border-tide-1/60 hover:text-accent"
-              >
-                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 6l-6 6 6 6" /></svg>
-              </button>
-              <button
-                type="button"
-                onClick={() => go(index + 1)}
-                aria-label="Testimoni berikutnya"
-                className="grid h-11 w-11 place-items-center rounded-full border border-line bg-raised transition hover:border-tide-1/60 hover:text-accent"
-              >
-                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6" /></svg>
-              </button>
-              <button
-                type="button"
-                onClick={() => setPaused((p) => !p)}
-                aria-label={paused ? "Putar otomatis" : "Jeda putar otomatis"}
-                className="ml-1 text-sm font-medium text-muted hover:text-fg"
-                hidden={reduced}
-              >
-                {paused ? "Putar" : "Jeda"}
-              </button>
-            </div>
-          )}
         </div>
 
         <div
@@ -161,7 +132,7 @@ export default function TestimonialCarousel({
                     </span>
                     <span>
                       <span className="block font-semibold">{t.name}</span>
-                      <span className="block text-sm text-muted">{t.role}, {t.city}</span>
+                      <span className="block text-sm text-muted">{[t.role, t.city].filter(Boolean).join(", ")}</span>
                     </span>
                   </figcaption>
                 </figure>

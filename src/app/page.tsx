@@ -82,7 +82,7 @@ export default function Home() {
         <TestimonialCarousel
           id="testimoni"
           title="Cerita dari pengguna TapHub"
-          description="Pemilik usaha di berbagai kota memakai TapHub untuk merapikan penjualan, stok, dan laporan."
+          description="Apa kata mereka yang sudah memakai TapHub untuk usahanya."
           items={companyTestimonials}
         />
       ) : (

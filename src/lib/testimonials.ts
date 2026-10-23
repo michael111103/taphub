@@ -2,7 +2,7 @@ export type Testimonial = {
   quote: string;
   name: string;
   role: string; // contoh: "Pemilik Kopi Senja"
-  city: string;
+  city?: string;
   rating?: 1 | 2 | 3 | 4 | 5;
 };
 
@@ -27,7 +27,13 @@ export type Testimonial = {
  */
 
 /** Testimoni di beranda taphub.id (menggantikan bagian "Tentang TapHub" saat diisi) */
-export const companyTestimonials: Testimonial[] = [];
+export const companyTestimonials: Testimonial[] = [
+  {
+    quote: "Buat bisnis yang baru banget berdiri, TapHub banyak banget membantu. Fitur-fiturnya yang lengkap dan simpel membuat kami yang bukan dari background akuntansi jadi mudah memahami.",
+    name: "Andre Susanto",
+    role: "PT Pratama Nusantara Prakarsa",
+  },
+];
 
 /** Testimoni di halaman TapPOS (pos.taphub.id) */
 export const posTestimonials: Testimonial[] = [];

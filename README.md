@@ -50,7 +50,7 @@ Tips SEO: pakai kata kunci utama di judul, deskripsi 140 sampai 160 karakter, da
 ## Testimoni
 
 Semua testimoni ada di `src/lib/testimonials.ts`:
-- `companyTestimonials`: carousel di beranda (berganti otomatis dengan efek fade, bisa digeser, tombol dan titik navigasi). Selama kosong, beranda menampilkan bagian "Tentang TapHub".
+- `companyTestimonials`: carousel di beranda (berganti otomatis dengan efek fade saat ada 2 testimoni atau lebih, bisa digeser, dengan titik navigasi). Selama kosong, beranda menampilkan bagian "Tentang TapHub".
 - `posTestimonials`: bagian testimoni di pos.taphub.id. Tersembunyi selama kosong.
 
 Isi hanya dengan testimoni asli dan minta izin pengguna sebelum nama mereka ditampilkan.
