@@ -54,7 +54,6 @@ Semua testimoni ada di `src/lib/testimonials.ts`:
 - `posTestimonials`: bagian testimoni di pos.taphub.id. Tersembunyi selama kosong.
 
 Isi hanya dengan testimoni asli dan minta izin pengguna sebelum nama mereka ditampilkan.
-Untuk melihat desain carousel dengan contoh testimoni, buka `/pratinjau/testimoni` (tidak diindeks Google dan tidak ditautkan di website). Contohnya ada di `sampleTestimonials`, jangan dipindah ke daftar asli.
 
 ## Data yang perlu dicek
 
