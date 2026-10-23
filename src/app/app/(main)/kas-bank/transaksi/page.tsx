@@ -47,7 +47,7 @@ export default async function BankTxPage({ searchParams }: { searchParams: { jen
           </div>
           <div>
             <label className="label" htmlFor="ctr">{kind === "transfer" ? "Ke rekening" : kind === "receive" ? "Sumber dana (akun)" : "Untuk akun"}</label>
-            <select id="ctr" name="counter_account_id" className="field" defaultValue={kind === "transfer" ? cash.find((c) => c.id !== searchParams.akun)?.id : undefined}>
+            <select id="ctr" name="counter_account_id" className="field" defaultValue={kind === "transfer" ? cash.find((c) => c.id !== (searchParams.akun ?? cash[0]?.id))?.id : undefined}>
               {groups.map((g) => (
                 <optgroup key={g} label={CATEGORY_LABEL[g] ?? g}>
                   {counters.filter((a) => a.category === g).map((a) => <option key={a.id} value={a.id}>{a.code} · {a.name}</option>)}

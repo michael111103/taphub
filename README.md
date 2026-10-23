@@ -1,6 +1,6 @@
 # TapHub
 
-Website utama TapHub (taphub.id). Next.js 14 + Tailwind CSS.
+Website utama TapHub (taphub.id), landing TapPOS (pos.taphub.id), dan aplikasi TapHub (app.taphub.id). Next.js 14 + Tailwind CSS + Supabase.
 
 ## Menjalankan
 
@@ -113,3 +113,39 @@ Analytics hanya aktif setelah pengunjung menekan "Setuju" di banner cookie.
 20. Performa: halaman statis, font self-hosted, `next/image` (AVIF/WebP), animasi CSS tanpa library tambahan
 
 Teks Kebijakan Privasi dan Syarat & Ketentuan adalah draf awal. Sebaiknya ditinjau ahli hukum sebelum layanan berjalan.
+
+## Aplikasi app.taphub.id
+
+Kode aplikasi ada di `src/app/app/`. Di domain `app.taphub.id` halaman dibuka tanpa awalan `/app` (diatur di `src/middleware.ts`); di preview Vercel dan localhost aplikasi dibuka di `/app`. Tes lokal: `http://app.localhost:3000`.
+
+| Modul | Alamat |
+| --- | --- |
+| Login, daftar, lupa password | `/login`, `/daftar`, `/lupa-password` |
+| Beranda (dashboard live + grafik animasi) | `/` |
+| Penjualan: overview, tagihan, pemesanan, penawaran | `/penjualan`, `/penjualan/tagihan`, ... |
+| Pembelian: overview, tagihan, pesanan, penawaran | `/pembelian`, `/pembelian/tagihan`, ... |
+| Biaya, Produk, Inventori, Kontak | `/biaya`, `/produk`, `/inventori`, `/kontak` |
+| Kas & Bank, Akun (COA), Aset Tetap | `/kas-bank`, `/akun`, `/aset-tetap` |
+| Laporan (neraca, laba rugi, arus kas, buku besar, jurnal, dll.) | `/laporan` |
+| Pengaturan, langganan, checkout | `/pengaturan`, `/langganan`, `/checkout` |
+
+### Database (Supabase)
+
+Skema, RLS, dan fungsi ada di `supabase/migrations/`. Semua transaksi (tagihan, pembayaran, biaya, kas bank, aset) otomatis membuat jurnal double-entry, jadi laporan selalu seimbang. Pembatalan memakai jurnal balik.
+
+- Harga paket ada di tabel `plans` (bisa diubah langsung dari dashboard Supabase).
+- Tombol "Isi data contoh" memanggil fungsi `seed_demo`.
+
+### Environment variable (Vercel)
+
+| Nama | Isi |
+| --- | --- |
+| `NEXT_PUBLIC_SUPABASE_URL` | URL project Supabase |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Publishable key Supabase (aman di browser, dilindungi RLS) |
+| `NEXT_PUBLIC_MAIN_URL`, `NEXT_PUBLIC_POS_URL` | `https://taphub.id`, `https://pos.taphub.id` (Production) |
+
+Nanti untuk payment gateway (Xendit) ditambah `XENDIT_SECRET_KEY` dan `XENDIT_WEBHOOK_TOKEN` sebagai **Sensitive**, tanpa awalan `NEXT_PUBLIC_`.
+
+### Supabase Auth
+
+Di Supabase > Authentication > URL Configuration: Site URL `https://app.taphub.id`, Redirect URLs `https://app.taphub.id/**` dan `https://*-michaelivnvs-projects.vercel.app/**`.

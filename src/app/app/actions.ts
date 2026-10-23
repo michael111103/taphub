@@ -11,7 +11,9 @@ const s = (fd: FormData, k: string) => {
   return typeof v === "string" ? v.trim() : "";
 };
 const n = (fd: FormData, k: string) => {
-  const v = s(fd, k).replace(/\./g, "").replace(",", ".");
+  let v = s(fd, k).replace(/\s/g, "");
+  // "1.250.000,50" (format Indonesia) -> 1250000.50; "1250000.5" (input number) tetap
+  if (v.includes(",")) v = v.replace(/\./g, "").replace(",", ".");
   const num = Number(v);
   return Number.isFinite(num) ? num : 0;
 };
