@@ -6,6 +6,8 @@ import CtaCard from "@/components/CtaCard";
 import FaqList from "@/components/FaqList";
 import { companyFaqs } from "@/lib/faq";
 import { whatsappLink } from "@/lib/site";
+import TestimonialCarousel from "@/components/TestimonialCarousel";
+import { companyTestimonials } from "@/lib/testimonials";
 
 const missions = [
   "Membuat software bisnis yang mudah dipakai tanpa pelatihan panjang.",
@@ -75,41 +77,54 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TENTANG */}
-      <section id="tentang" aria-labelledby="tentang-judul" className="border-t border-line">
-        <div className="mx-auto grid max-w-page gap-14 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-2">
-          <div>
-            <h2 id="tentang-judul" className="text-balance text-3xl font-semibold tracking-[-0.02em] sm:text-5xl">
-              Tentang TapHub
-            </h2>
-            <div className="mt-6 max-w-2xl space-y-5 text-lg leading-8 text-muted">
-              <p>
-                Banyak usaha di Indonesia masih mencatat pesanan di kertas, menghitung stok dengan perkiraan, dan merekap keuangan di akhir bulan. Software yang ada sering terlalu rumit atau terlalu mahal untuk usaha kecil.
-              </p>
-              <p>
-                TapHub hadir untuk mengubah itu: rangkaian aplikasi yang sederhana, terjangkau, dan saling terhubung, sehingga pemilik usaha bisa fokus melayani pelanggan.
-              </p>
+      {/* TESTIMONI (muncul saat src/lib/testimonials.ts berisi testimoni asli); selama kosong, bagian Tentang tetap tampil */}
+      {companyTestimonials.length > 0 ? (
+        <TestimonialCarousel
+          id="testimoni"
+          title="Cerita dari pengguna TapHub"
+          description="Pemilik usaha di berbagai kota memakai TapHub untuk merapikan penjualan, stok, dan laporan."
+          items={companyTestimonials}
+        />
+      ) : (
+        <>
+        {/* TENTANG */}
+        <section id="tentang" aria-labelledby="tentang-judul" className="border-t border-line">
+          <div className="mx-auto grid max-w-page gap-14 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-2">
+            <div>
+              <h2 id="tentang-judul" className="text-balance text-3xl font-semibold tracking-[-0.02em] sm:text-5xl">
+                Tentang TapHub
+              </h2>
+              <div className="mt-6 max-w-2xl space-y-5 text-lg leading-8 text-muted">
+                <p>
+                  Banyak usaha di Indonesia masih mencatat pesanan di kertas, menghitung stok dengan perkiraan, dan merekap keuangan di akhir bulan. Software yang ada sering terlalu rumit atau terlalu mahal untuk usaha kecil.
+                </p>
+                <p>
+                  TapHub hadir untuk mengubah itu: rangkaian aplikasi yang sederhana, terjangkau, dan saling terhubung, sehingga pemilik usaha bisa fokus melayani pelanggan.
+                </p>
+              </div>
+            </div>
+            <div className="space-y-10 lg:pt-20">
+              <div>
+                <h3 className="text-lg font-semibold">Visi</h3>
+                <p className="mt-2 text-lg leading-8 text-muted">Menjadi ekosistem software pilihan usaha kecil dan menengah di Indonesia.</p>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold">Misi</h3>
+                <ul className="mt-3 space-y-3 text-lg leading-8 text-muted">
+                  {missions.map((m) => (
+                    <li key={m} className="flex gap-3">
+                      <span aria-hidden="true" className="mt-3.5 h-1.5 w-1.5 shrink-0 rounded-full bg-tide-1" />
+                      {m}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
-          <div className="space-y-10 lg:pt-20">
-            <div>
-              <h3 className="text-lg font-semibold">Visi</h3>
-              <p className="mt-2 text-lg leading-8 text-muted">Menjadi ekosistem software pilihan usaha kecil dan menengah di Indonesia.</p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold">Misi</h3>
-              <ul className="mt-3 space-y-3 text-lg leading-8 text-muted">
-                {missions.map((m) => (
-                  <li key={m} className="flex gap-3">
-                    <span aria-hidden="true" className="mt-3.5 h-1.5 w-1.5 shrink-0 rounded-full bg-tide-1" />
-                    {m}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+
+        </>
+      )}
 
       {/* FAQ */}
       <section id="faq" aria-labelledby="faq-judul" className="border-t border-line">

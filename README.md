@@ -49,8 +49,12 @@ Tips SEO: pakai kata kunci utama di judul, deskripsi 140 sampai 160 karakter, da
 
 ## Testimoni
 
-Bagian testimoni di halaman TapPOS otomatis tersembunyi selama `src/lib/testimonials.ts` kosong.
-Isi dengan testimoni asli (dengan izin pengguna), maka bagian itu muncul sendiri.
+Semua testimoni ada di `src/lib/testimonials.ts`:
+- `companyTestimonials`: carousel di beranda (berganti otomatis dengan efek fade, bisa digeser, tombol dan titik navigasi). Selama kosong, beranda menampilkan bagian "Tentang TapHub".
+- `posTestimonials`: bagian testimoni di pos.taphub.id. Tersembunyi selama kosong.
+
+Isi hanya dengan testimoni asli dan minta izin pengguna sebelum nama mereka ditampilkan.
+Untuk melihat desain carousel dengan contoh testimoni, buka `/pratinjau/testimoni` (tidak diindeks Google dan tidak ditautkan di website). Contohnya ada di `sampleTestimonials`, jangan dipindah ke daftar asli.
 
 ## Data yang perlu dicek
 
