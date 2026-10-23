@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Halaman tidak ditemukan",
@@ -8,6 +10,9 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
+    <>
+    <Header />
+    <main id="konten">
     <section className="relative overflow-hidden">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(50%_50%_at_50%_30%,rgba(27,91,255,0.22),transparent_70%)]" />
       <div className="mx-auto flex min-h-[70vh] max-w-page flex-col items-center justify-center px-4 py-24 text-center sm:px-6">
@@ -22,5 +27,8 @@ export default function NotFound() {
         </div>
       </div>
     </section>
+    </main>
+    <Footer />
+    </>
   );
 }

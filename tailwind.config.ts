@@ -2,6 +2,8 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  // dark: aktif di dalam elemen ber-class theme-dark (dipakai aplikasi app.taphub.id)
+  darkMode: ["selector", ".theme-dark"],
   theme: {
     extend: {
       colors: {
@@ -21,6 +23,8 @@ const config: Config = {
       },
       fontFamily: {
         sans: ['"Plus Jakarta Sans Variable"', "system-ui", "sans-serif"],
+        mono: ['"JetBrains Mono Variable"', "ui-monospace", "monospace"],
+        display: ['"Lexend Variable"', '"Plus Jakarta Sans Variable"', "sans-serif"],
       },
       maxWidth: {
         page: "72rem",

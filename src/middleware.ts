@@ -1,33 +1,80 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { createServerClient } from "@supabase/ssr";
 
 /**
- * Subdomain TapPOS.
+ * Subdomain:
  *
- * - pos.taphub.id/            -> menampilkan halaman src/app/pos (URL di browser tetap pos.taphub.id)
+ * pos.taphub.id (landing TapPOS)
+ * - pos.taphub.id/            -> halaman src/app/(site)/pos
  * - pos.taphub.id/sitemap.xml -> sitemap khusus TapPOS
  * - pos.taphub.id/robots.txt  -> robots khusus TapPOS
- * - pos.taphub.id/<halaman lain> -> dialihkan ke taphub.id/<halaman lain>
- * - taphub.id/pos             -> dialihkan permanen ke pos.taphub.id (supaya Google hanya mengindeks satu alamat)
+ * - pos.taphub.id/<lainnya>   -> dialihkan ke taphub.id/<lainnya>
+ * - taphub.id/pos             -> dialihkan permanen ke pos.taphub.id
  *
- * Di preview Vercel (*.vercel.app) dan localhost, TapPOS tetap bisa dibuka di /pos.
- * Untuk tes subdomain di komputer sendiri, buka http://pos.localhost:3000
+ * app.taphub.id (aplikasi TapHub)
+ * - app.taphub.id/<path>      -> halaman src/app/app/<path> (URL di browser tetap app.taphub.id/<path>)
+ * - taphub.id/app/<path>      -> dialihkan ke app.taphub.id/<path>
+ *
+ * Di preview Vercel (*.vercel.app) dan localhost, keduanya tetap bisa dibuka di /pos dan /app.
+ * Tes subdomain di komputer sendiri: http://pos.localhost:3000 dan http://app.localhost:3000
  */
 const MAIN_HOSTS = new Set(["taphub.id", "www.taphub.id"]);
 const MAIN_URL = "https://taphub.id";
 const POS_URL = "https://pos.taphub.id";
+const APP_URL = "https://app.taphub.id";
 
+function hostName(host: string) {
+  return host.split(":")[0];
+}
 function isPosHost(host: string) {
-  const name = host.split(":")[0];
+  const name = hostName(host);
   return name === "pos.taphub.id" || name === "pos.localhost";
+}
+function isAppHost(host: string) {
+  const name = hostName(host);
+  return name === "app.taphub.id" || name === "app.localhost";
 }
 
 // File yang selalu dilayani apa adanya di semua host
-const PASSTHROUGH = /^\/(_next|images|icon|apple-icon|taphub|favicon|opengraph-image|pos\/)/;
+const PASSTHROUGH = /^\/(_next|images|icon|apple-icon|taphub|whitelogo|favicon|opengraph-image|pos\/)/;
+const APP_PASSTHROUGH = /^\/(_next|images|icon|apple-icon|taphub|whitelogo|favicon|app\/)/;
 
-export function middleware(req: NextRequest) {
+/** Menyegarkan sesi login Supabase lalu mengembalikan response yang sama */
+async function withSupabaseSession(req: NextRequest, res: NextResponse) {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !key) return res;
+  const supabase = createServerClient(url, key, {
+    cookies: {
+      getAll() {
+        return req.cookies.getAll();
+      },
+      setAll(cookiesToSet) {
+        cookiesToSet.forEach(({ name, value, options }) => res.cookies.set(name, value, options));
+      },
+    },
+  });
+  await supabase.auth.getUser();
+  return res;
+}
+
+export async function middleware(req: NextRequest) {
   const host = req.headers.get("host") ?? "";
   const { pathname, search } = req.nextUrl;
 
+  // ---------- app.taphub.id ----------
+  if (isAppHost(host)) {
+    if (APP_PASSTHROUGH.test(pathname) && !pathname.startsWith("/app/")) return NextResponse.next();
+    const url = req.nextUrl.clone();
+    if (pathname === "/robots.txt") {
+      return new NextResponse("User-agent: *\nDisallow: /\n", { headers: { "content-type": "text/plain" } });
+    }
+    url.pathname = pathname.startsWith("/app/") || pathname === "/app" ? pathname : `/app${pathname === "/" ? "" : pathname}`;
+    const res = NextResponse.rewrite(url, { request: { headers: withBase(req, "") } });
+    return withSupabaseSession(req, res);
+  }
+
+  // ---------- pos.taphub.id ----------
   if (isPosHost(host)) {
     if (PASSTHROUGH.test(pathname) || pathname === "/pos") return NextResponse.next();
 
@@ -44,19 +91,38 @@ export function middleware(req: NextRequest) {
       url.pathname = "/pos/robots.txt";
       return NextResponse.rewrite(url);
     }
-    // Halaman situs utama (hubungi kami, legal, dll.) dibuka di domain utama
     const mainBase = host.startsWith("pos.localhost") ? `http://${host.replace(/^pos\./, "")}` : MAIN_URL;
     return NextResponse.redirect(`${mainBase}${pathname}${search}`, 308);
   }
 
-  if (MAIN_HOSTS.has(host.split(":")[0]) && (pathname === "/pos" || pathname.startsWith("/pos/"))) {
-    const rest = pathname.replace(/^\/pos/, "") || "/";
-    if (!rest.startsWith("/opengraph-image")) {
-      return NextResponse.redirect(`${POS_URL}${rest}${search}`, 308);
+  // ---------- taphub.id ----------
+  if (MAIN_HOSTS.has(hostName(host))) {
+    if (pathname === "/pos" || pathname.startsWith("/pos/")) {
+      const rest = pathname.replace(/^\/pos/, "") || "/";
+      if (!rest.startsWith("/opengraph-image")) {
+        return NextResponse.redirect(`${POS_URL}${rest}${search}`, 308);
+      }
+    }
+    if (pathname === "/app" || pathname.startsWith("/app/")) {
+      const rest = pathname.replace(/^\/app/, "") || "/";
+      return NextResponse.redirect(`${APP_URL}${rest}${search}`, 307);
     }
   }
 
+  // Preview Vercel / localhost: aplikasi dibuka di /app
+  if (pathname === "/app" || pathname.startsWith("/app/")) {
+    const res = NextResponse.next({ request: { headers: withBase(req, "/app") } });
+    return withSupabaseSession(req, res);
+  }
+
   return NextResponse.next();
+}
+
+/** Header x-app-base memberi tahu halaman aplikasi prefix link yang dipakai ("" di app.taphub.id, "/app" di tempat lain) */
+function withBase(req: NextRequest, base: string) {
+  const headers = new Headers(req.headers);
+  headers.set("x-app-base", base);
+  return headers;
 }
 
 export const config = {

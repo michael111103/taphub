@@ -1,5 +1,6 @@
 @import "@fontsource-variable/plus-jakarta-sans";
 @import "@fontsource-variable/lexend";
+@import "@fontsource-variable/jetbrains-mono";
 
 @tailwind base;
 @tailwind components;
@@ -121,3 +122,74 @@ h2[class*="text-4xl"],
 h2[class*="text-5xl"] {
   font-family: "Lexend Variable", "Plus Jakarta Sans Variable", system-ui, sans-serif;
 }
+
+/* ================= Aplikasi app.taphub.id ================= */
+.app-root {
+  --ink: 244 246 250;
+  --panel: 248 250 253;
+  --raised: 255 255 255;
+  --line: rgba(15, 23, 42, 0.09);
+  --fg: 15 23 42;
+  --muted: 100 112 132;
+  --accent: 27 91 255;
+  --chart-grid: rgba(15, 23, 42, 0.07);
+  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px -16px rgba(15, 23, 42, 0.18);
+  background: rgb(var(--ink));
+  color: rgb(var(--fg));
+}
+.app-root.theme-dark {
+  --ink: 7 11 20;
+  --panel: 11 17 29;
+  --raised: 14 21 35;
+  --line: rgba(148, 163, 184, 0.13);
+  --fg: 226 232 242;
+  --muted: 134 146 168;
+  --accent: 56 200 248;
+  --chart-grid: rgba(148, 163, 184, 0.09);
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 12px 30px -18px rgba(0, 0, 0, 0.8);
+}
+.app-root .card {
+  @apply rounded-2xl border border-line bg-raised;
+  box-shadow: var(--shadow-card);
+}
+.app-root .field {
+  @apply h-10 w-full rounded-xl border border-line bg-raised px-3 text-sm text-fg outline-none transition placeholder:text-muted/70 focus:border-tide-2/60 focus:ring-2 focus:ring-tide-2/15;
+}
+.app-root textarea.field { @apply h-auto py-2; }
+.app-root .label { @apply mb-1.5 block text-xs font-semibold text-muted; }
+.app-root .btn { @apply inline-flex h-10 items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold transition disabled:opacity-50; }
+.app-root .btn-primary { @apply inline-flex h-10 items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold transition disabled:opacity-50 text-white; background-image: linear-gradient(135deg, #38c8f8 0%, #1b5bff 100%); box-shadow: 0 6px 18px -8px rgba(27, 91, 255, 0.8); }
+.app-root .btn-primary:hover { filter: brightness(1.06); }
+.app-root .btn-soft { @apply inline-flex h-10 items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold transition disabled:opacity-50 border border-line bg-raised text-fg hover:bg-fg/[0.04]; }
+.app-root .btn-danger { @apply inline-flex h-10 items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold transition disabled:opacity-50 border border-rose-500/30 bg-rose-500/10 text-rose-600 hover:bg-rose-500/15; }
+.app-root.theme-dark .btn-danger { @apply text-rose-300; }
+.app-root .mono { font-family: "JetBrains Mono Variable", ui-monospace, monospace; }
+.app-root .table-app { @apply w-full text-sm; }
+.app-root .table-app th { @apply whitespace-nowrap border-b border-line px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-muted; }
+.app-root .table-app td { @apply border-b border-line px-4 py-3 align-middle; }
+.app-root .table-app tbody tr { @apply transition hover:bg-fg/[0.025]; }
+
+@keyframes carousel-progress-app { from { width: 0 } to { width: 100% } }
+@keyframes chart-rise { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes chart-grow-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes chart-draw { from { stroke-dashoffset: var(--len, 1000); } to { stroke-dashoffset: 0; } }
+@keyframes chart-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes feed-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+@keyframes live-pulse { 0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.55); } 100% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); } }
+@keyframes shimmer { from { background-position: -200% 0; } to { background-position: 200% 0; } }
+.anim-rise { transform-origin: bottom; animation: chart-rise 0.9s cubic-bezier(0.2, 0.9, 0.2, 1) both; }
+.anim-grow-x { transform-origin: left; animation: chart-grow-x 1s cubic-bezier(0.2, 0.9, 0.2, 1) both; }
+.anim-draw { stroke-dasharray: var(--len, 1000); animation: chart-draw 1.4s cubic-bezier(0.4, 0, 0.2, 1) both; }
+.anim-fade { animation: chart-fade 0.6s ease-out both; }
+.anim-feed { animation: feed-in 0.5s cubic-bezier(0.2, 0.9, 0.2, 1) both; }
+.live-dot { animation: live-pulse 1.6s ease-out infinite; }
+.skeleton { background: linear-gradient(90deg, rgba(148,163,184,.08) 25%, rgba(148,163,184,.18) 50%, rgba(148,163,184,.08) 75%); background-size: 200% 100%; animation: shimmer 1.4s linear infinite; }
+
+@media print {
+  .app-root .no-print { display: none !important; }
+  .app-root { background: white; }
+  .app-root .card { box-shadow: none; }
+}
+.app-root .logo-dark { display: none; }
+.app-root.theme-dark .logo-dark { display: block; }
+.app-root.theme-dark .logo-light { display: none; }
