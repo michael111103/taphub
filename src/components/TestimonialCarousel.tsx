@@ -111,7 +111,7 @@ export default function TestimonialCarousel({
                     active ? "translate-y-0 scale-100 opacity-100" : "pointer-events-none translate-y-3 scale-[0.98] opacity-0"
                   }`}
                 >
-                  <svg aria-hidden="true" className="absolute right-7 top-6 text-tide-2/10 sm:right-10 sm:top-8" width="72" height="72" viewBox="0 0 24 24" fill="currentColor">
+                  <svg aria-hidden="true" className="absolute right-6 top-5 h-12 w-12 text-tide-2/10 sm:right-10 sm:top-8 sm:h-[72px] sm:w-[72px]" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M10 7H6a3 3 0 0 0-3 3v4h5v-4H5.5A1.5 1.5 0 0 1 7 8.5h3zm10 0h-4a3 3 0 0 0-3 3v4h5v-4h-2.5A1.5 1.5 0 0 1 17 8.5h3z" />
                   </svg>
                   {isSample && (
@@ -123,7 +123,7 @@ export default function TestimonialCarousel({
                       <span className="text-fg/15">{"★".repeat(5 - t.rating)}</span>
                     </p>
                   ) : null}
-                  <blockquote className="mt-5 flex-1 text-balance text-xl font-medium leading-relaxed tracking-[-0.01em] sm:text-2xl">
+                  <blockquote className="relative mt-5 flex-1 text-balance text-xl font-medium leading-relaxed tracking-[-0.01em] sm:text-2xl">
                     &ldquo;{t.quote}&rdquo;
                   </blockquote>
                   <figcaption className="mt-8 flex items-center gap-4">

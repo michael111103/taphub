@@ -33,6 +33,11 @@ export const companyTestimonials: Testimonial[] = [
     name: "Andre Susanto",
     role: "PT Pratama Nusantara Prakarsa",
   },
+  {
+    quote: "Customer support TapHub menjelaskan dengan sangat jelas dan mudah dimengerti. Ternyata pakai software akuntansi nggak sesulit yang kami kira.",
+    name: "Silmi Wildan",
+    role: "Pemilik 99 Persen Coffee",
+  },
 ];
 
 /** Testimoni di halaman TapPOS (pos.taphub.id) */
