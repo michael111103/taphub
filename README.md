@@ -149,3 +149,21 @@ Nanti untuk payment gateway (Xendit) ditambah `XENDIT_SECRET_KEY` dan `XENDIT_WE
 ### Supabase Auth
 
 Di Supabase > Authentication > URL Configuration: Site URL `https://app.taphub.id`, Redirect URLs `https://app.taphub.id/**` dan `https://*-michaelivnvs-projects.vercel.app/**`.
+
+### Email OTP (Resend)
+
+Daftar akun, masuk tanpa password, dan lupa password memakai kode OTP dari email. Email dikirim Supabase lewat SMTP Resend dari `noreply@taphub.id`.
+
+1. Resend > Domains: tambah `taphub.id`, lalu salin record DNS (MX/TXT untuk `send`, TXT `resend._domainkey`) ke DNS DomaiNesia. Tambahkan juga TXT `_dmarc` dengan isi `v=DMARC1; p=none;` kalau belum ada. Tunggu status Verified.
+2. Resend > API Keys: buat key baru dengan izin "Sending access" khusus domain `taphub.id`.
+3. Supabase > Authentication > Emails > SMTP Settings: aktifkan Custom SMTP. Host `smtp.resend.com`, port `465`, username `resend`, password = API key tadi, sender `noreply@taphub.id`, nama `TapHub`.
+4. Supabase > Authentication > Rate Limits: naikkan batas email per jam (misalnya 100).
+5. Supabase > Authentication > Sign In / Providers > Email: "Confirm email" aktif, Email OTP Length `6`, Email OTP Expiration `3600`.
+6. Supabase > Authentication > Emails > Templates: tempel isi file di `supabase/templates/`.
+
+| Template Supabase | File | Subject |
+| --- | --- | --- |
+| Confirm signup | `confirm-signup.html` | `{{ .Token }} adalah kode verifikasi TapHub kamu` |
+| Magic link | `magic-link.html` | `{{ .Token }} adalah kode masuk TapHub kamu` |
+| Reset password | `reset-password.html` | `Kode atur ulang password TapHub: {{ .Token }}` |
+| Change email address | `change-email.html` | `Konfirmasi email baru TapHub` |

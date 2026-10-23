@@ -5,16 +5,24 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { supabaseBrowser } from "@/lib/app/supabase-browser";
 import Icon, { GoogleLogo } from "@/components/app/Icon";
+import { CodeInput, ResendButton, authError } from "@/components/app/CodeInput";
 
 export default function SignupForm({ base }: { base: string }) {
   const router = useRouter();
   const [form, setForm] = useState({ name: "", business: "", email: "", phone: "", password: "" });
   const [show, setShow] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [sent, setSent] = useState(false);
+  const [step, setStep] = useState<"form" | "code">("form");
+  const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
 
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) => setForm((f) => ({ ...f, [k]: e.target.value }));
+  const email = form.email.trim().toLowerCase();
+
+  function goToStart() {
+    router.replace(`${base}/mulai?usaha=${encodeURIComponent(form.business.trim())}`);
+    router.refresh();
+  }
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -22,7 +30,7 @@ export default function SignupForm({ base }: { base: string }) {
     if (form.password.length < 8) return setError("Password minimal 8 karakter.");
     setLoading(true);
     const { data, error } = await supabaseBrowser().auth.signUp({
-      email: form.email.trim(),
+      email,
       password: form.password,
       options: {
         data: { full_name: form.name.trim(), business_name: form.business.trim(), phone: form.phone.trim() },
@@ -30,30 +38,61 @@ export default function SignupForm({ base }: { base: string }) {
       },
     });
     setLoading(false);
-    if (error) {
-      setError(error.message.includes("already registered") ? "Email ini sudah terdaftar. Silakan masuk." : error.message);
-      return;
-    }
-    if (data.session) {
-      router.replace(`${base}/mulai?usaha=${encodeURIComponent(form.business)}`);
-      router.refresh();
-    } else {
-      setSent(true);
-    }
+    if (error) return setError(authError(error.message));
+    // Email yang sudah terdaftar dan terkonfirmasi: Supabase tidak mengembalikan error, tapi identities kosong
+    if (data.user && data.user.identities?.length === 0) return setError("Email ini sudah terdaftar. Silakan masuk.");
+    if (data.session) return goToStart();
+    setStep("code");
   }
 
-  if (sent) {
+  async function onVerify(e: React.FormEvent) {
+    e.preventDefault();
+    setError(null);
+    if (code.length < 6) return setError("Masukkan kode dari email.");
+    setLoading(true);
+    const { data, error } = await supabaseBrowser().auth.verifyOtp({ email, token: code, type: "email" });
+    setLoading(false);
+    if (error || !data.session) return setError(authError(error?.message ?? "Kode tidak valid."));
+    goToStart();
+  }
+
+  async function resend() {
+    const { error } = await supabaseBrowser().auth.resend({
+      type: "signup",
+      email,
+      options: { emailRedirectTo: `${window.location.origin}${base}/auth/callback` },
+    });
+    return error ? authError(error.message) : null;
+  }
+
+  if (step === "code") {
     return (
-      <div className="mt-8 text-center">
-        <span className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-tide-2/10 text-accent">
-          <Icon name="mail" size={28} />
-        </span>
-        <h2 className="mt-4 text-lg font-semibold">Cek email kamu</h2>
-        <p className="mt-2 text-sm leading-6 text-muted">
-          Kami mengirim link konfirmasi ke <strong className="text-fg">{form.email}</strong>. Klik link itu untuk mengaktifkan akun, lalu masuk.
-        </p>
-        <Link href={`${base}/login`} className="btn-soft mt-6 w-full">Kembali ke halaman masuk</Link>
-      </div>
+      <form onSubmit={onVerify} className="mt-8 space-y-5">
+        <div className="text-center">
+          <span className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-tide-2/10 text-accent">
+            <Icon name="mail" size={28} />
+          </span>
+          <h2 className="mt-4 text-lg font-semibold">Masukkan kode verifikasi</h2>
+          <p className="mt-2 text-sm leading-6 text-muted">
+            Kami mengirim kode ke <strong className="text-fg">{email}</strong>. Cek juga folder Spam atau Promosi.
+          </p>
+        </div>
+        <CodeInput value={code} onChange={setCode} />
+        {error && <p role="alert" className="rounded-xl bg-rose-500/10 px-3 py-2 text-sm text-rose-600 dark:text-rose-300">{error}</p>}
+        <button type="submit" disabled={loading} className="btn-primary h-11 w-full">{loading ? "Memeriksa..." : "Verifikasi dan lanjutkan"}</button>
+        <ResendButton onResend={resend} />
+        <button
+          type="button"
+          onClick={() => {
+            setStep("form");
+            setCode("");
+            setError(null);
+          }}
+          className="block w-full text-center text-sm font-medium text-muted hover:text-fg"
+        >
+          Salah email? Ubah data pendaftaran
+        </button>
+      </form>
     );
   }
 
