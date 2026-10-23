@@ -1,4 +1,5 @@
 @import "@fontsource-variable/plus-jakarta-sans";
+@import "@fontsource-variable/lexend";
 
 @tailwind base;
 @tailwind components;
@@ -110,4 +111,13 @@
 @keyframes carousel-progress {
   from { width: 0%; }
   to { width: 100%; }
+}
+
+/* Judul besar (h1 + judul section) memakai Lexend, senada dengan logo TapHUB.
+   Subjudul, teks isi, dan judul kecil tetap Plus Jakarta Sans. */
+h1,
+h2[class*="text-3xl"],
+h2[class*="text-4xl"],
+h2[class*="text-5xl"] {
+  font-family: "Lexend Variable", "Plus Jakarta Sans Variable", system-ui, sans-serif;
 }
