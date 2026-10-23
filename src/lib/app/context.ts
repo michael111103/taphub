@@ -40,7 +40,9 @@ export const getSession = cache(async () => {
   const supabase = supabaseServer();
   const {
     data: { user },
+    error,
   } = await supabase.auth.getUser();
+  if (error && error.name !== "AuthSessionMissingError") console.warn("[auth] getUser gagal:", error.message);
   return { supabase, user };
 });
 

@@ -39,22 +39,40 @@ function isAppHost(host: string) {
 const PASSTHROUGH = /^\/(_next|images|icon|apple-icon|taphub|whitelogo|favicon|opengraph-image|pos\/)/;
 const APP_PASSTHROUGH = /^\/(_next|images|icon|apple-icon|taphub|whitelogo|favicon|app\/)/;
 
-/** Menyegarkan sesi login Supabase lalu mengembalikan response yang sama */
-async function withSupabaseSession(req: NextRequest, res: NextResponse) {
+/**
+ * Menyegarkan sesi login Supabase. Cookie hasil penyegaran ditulis ke request (supaya halaman /
+ * server action di request yang sama memakai token baru) dan ke response (supaya browser menyimpannya).
+ */
+async function refreshSession(req: NextRequest) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (!url || !key) return res;
+  const updated: { name: string; value: string; options?: Record<string, unknown> }[] = [];
+  if (!url || !key) return updated;
   const supabase = createServerClient(url, key, {
     cookies: {
       getAll() {
         return req.cookies.getAll();
       },
       setAll(cookiesToSet) {
-        cookiesToSet.forEach(({ name, value, options }) => res.cookies.set(name, value, options));
+        cookiesToSet.forEach((c) => {
+          req.cookies.set(c.name, c.value);
+          updated.push(c);
+        });
       },
     },
   });
   await supabase.auth.getUser();
+  return updated;
+}
+
+/** Response aplikasi: rewrite/next dengan header x-app-base + cookie sesi terbaru */
+async function appResponse(req: NextRequest, base: string, rewriteTo?: URL) {
+  const updated = await refreshSession(req);
+  const headers = new Headers(req.headers);
+  headers.set("x-app-base", base);
+  headers.set("cookie", req.cookies.toString());
+  const res = rewriteTo ? NextResponse.rewrite(rewriteTo, { request: { headers } }) : NextResponse.next({ request: { headers } });
+  updated.forEach(({ name, value, options }) => res.cookies.set(name, value, options));
   return res;
 }
 
@@ -70,8 +88,7 @@ export async function middleware(req: NextRequest) {
       return new NextResponse("User-agent: *\nDisallow: /\n", { headers: { "content-type": "text/plain" } });
     }
     url.pathname = pathname.startsWith("/app/") || pathname === "/app" ? pathname : `/app${pathname === "/" ? "" : pathname}`;
-    const res = NextResponse.rewrite(url, { request: { headers: withBase(req, "") } });
-    return withSupabaseSession(req, res);
+    return appResponse(req, "", url);
   }
 
   // ---------- pos.taphub.id ----------
@@ -111,19 +128,13 @@ export async function middleware(req: NextRequest) {
 
   // Preview Vercel / localhost: aplikasi dibuka di /app
   if (pathname === "/app" || pathname.startsWith("/app/")) {
-    const res = NextResponse.next({ request: { headers: withBase(req, "/app") } });
-    return withSupabaseSession(req, res);
+    return appResponse(req, "/app");
   }
 
   return NextResponse.next();
 }
 
-/** Header x-app-base memberi tahu halaman aplikasi prefix link yang dipakai ("" di app.taphub.id, "/app" di tempat lain) */
-function withBase(req: NextRequest, base: string) {
-  const headers = new Headers(req.headers);
-  headers.set("x-app-base", base);
-  return headers;
-}
+/* Header x-app-base memberi tahu halaman aplikasi prefix link yang dipakai ("" di app.taphub.id, "/app" di tempat lain) */
 
 export const config = {
   matcher: ["/((?!_next/static|_next/image).*)"],

@@ -231,7 +231,7 @@ export function Donut({
   const gap = segments.length > 1 ? 4 : 0;
   let acc = 0;
   return (
-    <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-center">
+    <div className="flex flex-col items-center gap-4">
       <div className="relative shrink-0" style={{ width: size, height: size }}>
         <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="-rotate-90">
           <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="var(--chart-grid)" strokeWidth={thickness} />
@@ -266,7 +266,7 @@ export function Donut({
           </div>
         </div>
       </div>
-      <ul className="w-full min-w-0 space-y-1.5 text-xs">
+      <ul className="grid w-full min-w-0 grid-cols-1 gap-x-4 gap-y-1 text-xs sm:grid-cols-2 xl:grid-cols-1 2xl:grid-cols-2">
         {segments.map((s, i) => (
           <li key={s.name} className={`flex items-center gap-2 rounded-lg px-1.5 py-1 transition ${hover === i ? "bg-fg/[0.05]" : ""}`} onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(null)}>
             <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: s.color ?? palette[i % palette.length] }} />

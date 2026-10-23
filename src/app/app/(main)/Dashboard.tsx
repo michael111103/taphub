@@ -266,17 +266,19 @@ export default function Dashboard({ summary: s, days, base, orgName, userName }:
 
         {/* Metrik utama */}
         <Card className="xl:col-span-4" title="Metrik utama" sub={`${days} hari · tren harian`} delay={260}>
-          <div className="grid flex-1 grid-cols-1 gap-3 sm:grid-cols-3 xl:grid-cols-3">
+          <div className="flex flex-1 flex-col gap-2.5">
             {[
-              { l: "Tagihan", v: s.invoice_count, f: (n: number) => Math.round(n).toLocaleString("id-ID"), d: pctChange(s.invoice_count, s.invoice_prev), vals: s.daily.map((d) => Number(d.invoices)), c: "#22D3EE" },
-              { l: "Rata-rata tagihan", v: avg, f: (n: number) => idrShort(n), d: pctChange(avg, s.invoice_prev ? Number(s.sales_prev) / s.invoice_prev : 0), vals: s.daily.map((d) => (d.invoices ? Number(d.sales) / d.invoices : 0)), c: "#EC4899" },
+              { l: "Jumlah tagihan", v: s.invoice_count, f: (n: number) => Math.round(n).toLocaleString("id-ID"), d: pctChange(s.invoice_count, s.invoice_prev), vals: s.daily.map((d) => Number(d.invoices)), c: "#22D3EE" },
+              { l: "Rata-rata nilai tagihan", v: avg, f: (n: number) => idrShort(n), d: pctChange(avg, s.invoice_prev ? Number(s.sales_prev) / s.invoice_prev : 0), vals: s.daily.map((d) => (d.invoices ? Number(d.sales) / d.invoices : 0)), c: "#EC4899" },
               { l: "Kas diterima", v: Number(s.received), f: (n: number) => idrShort(n), d: null, vals: s.daily.map((d) => Number(d.cash_in)), c: "#8B5CF6" },
             ].map((m) => (
-              <div key={m.l} className="flex min-w-0 flex-col rounded-xl border border-line bg-panel/60 p-3">
-                <p className="truncate text-[11px] font-medium text-muted">{m.l}</p>
-                <p className="mt-1 truncate text-lg font-semibold"><AnimatedNumber key={`${m.l}${days}`} value={m.v} format={m.f} /></p>
-                {m.d !== null ? <Delta value={m.d} suffix="" /> : <span className="text-xs text-muted">dari pelanggan</span>}
-                <div className="mt-auto pt-2"><Sparkline key={`${m.l}${days}`} values={m.vals} color={m.c} /></div>
+              <div key={m.l} className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] items-center gap-3 rounded-xl border border-line bg-panel/60 px-3 py-2.5">
+                <div className="min-w-0">
+                  <p className="truncate text-[11px] font-medium text-muted">{m.l}</p>
+                  <p className="truncate text-lg font-semibold leading-tight"><AnimatedNumber key={`${m.l}${days}`} value={m.v} format={m.f} /></p>
+                  {m.d !== null ? <Delta value={m.d} suffix="" /> : <span className="text-[11px] text-muted">dari pelanggan</span>}
+                </div>
+                <Sparkline key={`${m.l}${days}`} values={m.vals} color={m.c} height={46} />
               </div>
             ))}
           </div>
@@ -295,7 +297,7 @@ export default function Dashboard({ summary: s, days, base, orgName, userName }:
         </Card>
 
         {/* Laba bersih */}
-        <Card className="xl:col-span-4" title="Laba bersih" sub="6 bulan terakhir · pendapatan dikurangi beban" delay={380} right={<span className={`mono rounded-md px-2 py-0.5 text-[11px] font-semibold ${profitGrowth >= 0 ? "bg-emerald-500/12 text-emerald-600 dark:text-emerald-400" : "bg-rose-500/10 text-rose-600"}`}>{profitGrowth >= 0 ? "+" : ""}{profitGrowth.toFixed(0)}% dalam 6 bulan</span>}>
+        <Card className="xl:col-span-4" title="Laba bersih" sub="6 bulan terakhir · pendapatan dikurangi beban" delay={380} right={<span className={`mono whitespace-nowrap rounded-md px-2 py-0.5 text-[11px] font-semibold ${profitGrowth >= 0 ? "bg-emerald-500/12 text-emerald-600 dark:text-emerald-400" : "bg-rose-500/10 text-rose-600"}`}>{profitGrowth >= 0 ? "+" : ""}{profitGrowth.toFixed(0)}% · 6 bln</span>}>
           <Columns data={profitMonthly} format={idrShort} trend height={170} />
         </Card>
 
@@ -334,7 +336,7 @@ export default function Dashboard({ summary: s, days, base, orgName, userName }:
               { name: "Bersih", color: "#A3E635", values: cumulative.map((c) => c.net) },
             ]}
             format={compact}
-            height={190}
+            height={300}
           />
         </Card>
 
@@ -347,7 +349,7 @@ export default function Dashboard({ summary: s, days, base, orgName, userName }:
           right={<span className={`mt-1 h-2 w-2 rounded-full ${paused ? "bg-amber-500" : "live-dot bg-emerald-500"}`} />}
         >
           <ul className="min-h-[150px] flex-1 space-y-1.5">
-            {s.feed.slice(0, visibleFeed).map((f) => {
+            {s.feed.slice(0, Math.min(visibleFeed, 6)).map((f) => {
               const isPay = f.type === "payment";
               const href = f.type === "sales" ? `/penjualan/dokumen/${f.id}` : f.type === "expense" ? `/biaya/${f.id}` : f.number === "sales" ? `/penjualan/dokumen/${f.id}` : f.number === "purchase" ? `/pembelian/dokumen/${f.id}` : `/biaya/${f.id}`;
               const title = isPay ? (f.kind === "in" ? "Pembayaran diterima" : "Pembayaran keluar") : f.type === "expense" ? `Biaya ${f.number}` : `${f.kind === "invoice" ? "Tagihan" : f.kind === "order" ? "Pemesanan" : "Penawaran"} ${f.number}`;
