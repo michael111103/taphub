@@ -10,19 +10,29 @@ export default function ActionForm({
   children,
   className,
   resetOnSuccess = false,
+  clearOnSuccess,
   confirm,
 }: {
   action: (state: ActionState, fd: FormData) => Promise<ActionState>;
   children: React.ReactNode;
   className?: string;
   resetOnSuccess?: boolean;
+  /** Nama field yang dikosongkan setelah berhasil (misalnya password) */
+  clearOnSuccess?: string[];
   confirm?: string;
 }) {
   const [state, formAction] = useFormState(action, undefined);
   const ref = useRef<HTMLFormElement>(null);
   useEffect(() => {
-    if (state?.ok && resetOnSuccess) ref.current?.reset();
-  }, [state, resetOnSuccess]);
+    if (!state?.ok || !ref.current) return;
+    if (resetOnSuccess) ref.current.reset();
+    clearOnSuccess?.forEach((name) => {
+      const el = ref.current?.elements.namedItem(name);
+      if (el instanceof HTMLInputElement) el.value = "";
+    });
+    // hanya dijalankan saat hasil action berubah
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state]);
   return (
     <form
       ref={ref}

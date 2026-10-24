@@ -12,7 +12,7 @@ export default async function ProfilePage() {
   return (
     <div className="mx-auto max-w-3xl">
       <PageHeader title="Profilku" icon="user" tone="violet" crumbs={[{ label: "Pengaturan", href: href("/pengaturan") }, { label: "Profilku" }]} />
-      <ActionForm action={updateProfile} className="space-y-4">
+      <ActionForm action={updateProfile} className="space-y-4" clearOnSuccess={["password", "password2"]}>
         <section className="card space-y-4 p-5">
           <h2 className="font-semibold">Data diri</h2>
           <div className="grid gap-4 sm:grid-cols-2">

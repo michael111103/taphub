@@ -7,7 +7,6 @@ import Icon, { TileIcon } from "@/components/app/Icon";
 import { setTheme, useIsDark } from "@/components/app/ThemeToggle";
 import { AnimatedNumber, Columns, ComboChart, Donut, Gauge, HBars, MultiLine, PairBars, Sparkline, palette } from "@/components/app/charts";
 import { compact, idr, idrShort, pctChange, tglShort } from "@/lib/app/format";
-import { seedDemo } from "../actions";
 
 export type Summary = {
   range: { from: string; to: string; days: number };
@@ -69,7 +68,6 @@ export default function Dashboard({ summary: s, days, base, orgName, userName }:
   const [paused, setPaused] = useState(false);
   const [lastSync, setLastSync] = useState<Date | null>(null);
   const [visibleFeed, setVisibleFeed] = useState(0);
-  const [seedMsg, setSeedMsg] = useState<string | null>(null);
   const dark = useIsDark();
   const link = (p: string) => (p === "/" ? base || "/" : `${base}${p}`);
 
@@ -89,7 +87,6 @@ export default function Dashboard({ summary: s, days, base, orgName, userName }:
     return () => clearInterval(t);
   }, [s.feed]);
 
-  const empty = s.sales_total === 0 && s.daily.every((d) => d.sales === 0) && s.feed.length === 0;
 
   const dailyCombo = useMemo(
     () =>
@@ -169,50 +166,6 @@ export default function Dashboard({ summary: s, days, base, orgName, userName }:
           </button>
         </div>
       </div>
-
-      {empty && (
-        <div className="card anim-feed mb-5 overflow-hidden p-6 sm:p-8">
-          <div className="grid items-center gap-6 lg:grid-cols-[1fr_auto]">
-            <div>
-              <p className="mono text-xs font-semibold uppercase tracking-wider text-accent">Panduan awal · 3 langkah</p>
-              <h2 className="mt-2 text-xl font-semibold sm:text-2xl">Selamat datang di TapHub, {userName.split(" ")[0]}</h2>
-              <p className="mt-2 max-w-xl text-sm leading-6 text-muted">
-                Buat tagihan pertama, catat pembayarannya, lalu lihat hasilnya langsung di laporan Laba Rugi. Atau isi data contoh dulu untuk melihat semua grafik bekerja.
-              </p>
-              <div className="mt-5 flex flex-wrap gap-2">
-                <Link href={link("/penjualan/baru?jenis=invoice")} className="btn-primary"><Icon name="plus" size={16} /> Buat tagihan</Link>
-                <button
-                  type="button"
-                  className="btn-soft"
-                  onClick={() =>
-                    startTransition(async () => {
-                      const r = await seedDemo();
-                      setSeedMsg(r?.error ?? r?.ok ?? null);
-                      router.refresh();
-                    })
-                  }
-                >
-                  <Icon name="spark" size={16} /> {pending ? "Mengisi..." : "Isi data contoh"}
-                </button>
-              </div>
-              {seedMsg && <p className="mt-3 text-sm text-muted">{seedMsg}</p>}
-            </div>
-            <div className="grid grid-cols-3 gap-3 text-center text-xs">
-              {[
-                { i: "sales", t: "Buat tagihan", d: "± 2 menit" },
-                { i: "whatsapp", t: "Kirim ke pelanggan", d: "± 30 detik" },
-                { i: "report", t: "Lihat Laba Rugi", d: "± 30 detik" },
-              ].map((x, k) => (
-                <div key={x.t} className="rounded-2xl border border-line p-3">
-                  <span className="mx-auto grid h-10 w-10 place-items-center rounded-xl bg-tide-2/10 text-accent"><Icon name={x.i} size={20} /></span>
-                  <p className="mt-2 font-semibold">{k + 1}. {x.t}</p>
-                  <p className="text-muted">{x.d}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-12">
         {/* Penjualan */}
