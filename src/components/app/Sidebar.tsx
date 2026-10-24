@@ -71,11 +71,12 @@ export default function Sidebar({ base, orgName, planLabel, trialDays, userName,
       >
         {/* Kartu perusahaan */}
         <div className="flex items-center gap-3 border-b border-line px-4 py-4">
-          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-line bg-panel">
-            <img src="/icon" alt="" className="h-7 w-7 rounded-md" />
+          <span className="grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-xl border border-line bg-white">
+            {/* logo2.png punya ruang kosong lebar, jadi diperbesar supaya tulisannya terbaca */}
+            <img src="/logo2.png" alt="TapHub" className="h-full w-full scale-[1.7] object-contain" />
           </span>
           <div className={`min-w-0 flex-1 ${mini ? "lg:hidden" : ""}`}>
-            <p className="truncate text-sm font-semibold" title={orgName}>{orgName}</p>
+            <p className="truncate text-sm font-semibold">TapHub</p>
             <p className="truncate text-xs text-muted">{planLabel}</p>
           </div>
           <button type="button" onClick={onToggleCollapse} className="hidden h-8 w-8 shrink-0 place-items-center rounded-lg text-muted hover:bg-fg/5 hover:text-fg lg:grid" aria-label={mini ? "Lebarkan menu" : "Ciutkan menu"}>

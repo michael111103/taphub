@@ -46,7 +46,7 @@ const missions = [
 const timeline = [
   { when: "Oktober 2026", title: "TapHub lahir", body: "TapHub didirikan di bawah PT Bara Karbon Internasional dengan kantor di Jakarta Selatan." },
   { when: "2026", title: "TapPOS sebagai produk unggulan", body: "Aplikasi kasir dan sistem POS untuk F&B, retail, dan jasa menjadi produk pertama yang kami kembangkan." },
-  { when: "Berikutnya", title: "Ekosistem bertambah", body: "TapBooks, TapInvoice, TapStock, dan produk lainnya dirilis bertahap dan saling terhubung dalam satu akun." },
+  { when: "Berikutnya", title: "Ekosistem bertambah", body: "TapBisnis, TapInvoice, TapStock, dan produk lainnya dirilis bertahap dan saling terhubung dalam satu akun." },
 ];
 
 export default function AboutPage() {

@@ -47,7 +47,7 @@ function isAppHost(host: string) {
 
 // File yang selalu dilayani apa adanya di semua host
 const PASSTHROUGH = /^\/(_next|images|email|icon|apple-icon|taphub|whitelogo|favicon|opengraph-image|pos\/|website\/)/;
-const APP_PASSTHROUGH = /^\/(_next|images|icon|apple-icon|taphub|whitelogo|favicon|app\/)/;
+const APP_PASSTHROUGH = /^\/(_next|images|email|icon|apple-icon|taphub|whitelogo|favicon|app\/)|\.(png|jpe?g|svg|webp|ico)$/;
 
 /**
  * Menyegarkan sesi login Supabase. Cookie hasil penyegaran ditulis ke request (supaya halaman /

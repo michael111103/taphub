@@ -48,7 +48,7 @@ const items: Item[] = [
   },
 ];
 
-const showcase = ["tappos", "tappay", "tapstock", "tapbooks", "tapinvoice"].map(
+const showcase = ["tappos", "tappay", "tapstock", "tapbisnis", "tapinvoice"].map(
   (slug) => products.find((p) => p.slug === slug)!,
 );
 

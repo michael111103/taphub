@@ -12,7 +12,7 @@ export const companyFaqs: Faq[] = [
   },
   {
     q: "Produk apa saja yang dimiliki TapHub?",
-    a: "Rangkaian produk TapHub terdiri dari TapPOS (aplikasi kasir dan sistem POS), TapPay (link pembayaran dan QRIS), TapInvoice (invoice), TapBooks (pembukuan), TapStock (stok), TapStaff (karyawan), TapWebsite (pembuatan website), TapLoyalty (poin dan member), dan TapHealth (pola hidup sehat). TapPOS dan TapWebsite sudah bisa dipakai, sementara produk lainnya dirilis secara bertahap.",
+    a: "Rangkaian produk TapHub terdiri dari TapPOS (aplikasi kasir dan sistem POS), TapPay (link pembayaran dan QRIS), TapInvoice (invoice), TapBisnis (pembukuan), TapStock (stok), TapStaff (karyawan), TapWebsite (pembuatan website), TapLoyalty (poin dan member), dan TapHealth (pola hidup sehat). TapPOS dan TapWebsite sudah bisa dipakai, sementara produk lainnya dirilis secara bertahap.",
   },
   {
     q: "Siapa saja yang dapat menggunakan TapHub?",
@@ -20,7 +20,7 @@ export const companyFaqs: Faq[] = [
   },
   {
     q: "Apakah semua produk TapHub saling terintegrasi?",
-    a: "Ya. Semua produk TapHub dirancang untuk terhubung dalam satu akun dan berbagi data. Misalnya, penjualan dari TapPOS dapat langsung mengurangi stok di TapStock dan tercatat sebagai jurnal di TapBooks, tanpa perlu input ulang. Integrasi ini aktif seiring tersedianya setiap produk.",
+    a: "Ya. Semua produk TapHub dirancang untuk terhubung dalam satu akun dan berbagi data. Misalnya, penjualan dari TapPOS dapat langsung mengurangi stok di TapStock dan tercatat sebagai jurnal di TapBisnis, tanpa perlu input ulang. Integrasi ini aktif seiring tersedianya setiap produk.",
   },
   {
     q: "Bagaimana TapHub membantu meningkatkan efisiensi bisnis?",
@@ -72,7 +72,7 @@ export const posFaqs: Faq[] = [
   },
   {
     q: "Apakah data penjualan TapPOS terhubung ke pembukuan?",
-    a: "TapPOS dirancang terhubung dengan produk TapHub lain. Penjualan dari TapPOS dapat tercatat otomatis di TapBooks untuk pembukuan dan mengurangi stok di TapStock, sehingga tidak perlu rekap manual. Integrasi ini aktif seiring tersedianya setiap produk.",
+    a: "TapPOS dirancang terhubung dengan produk TapHub lain. Penjualan dari TapPOS dapat tercatat otomatis di TapBisnis untuk pembukuan dan mengurangi stok di TapStock, sehingga tidak perlu rekap manual. Integrasi ini aktif seiring tersedianya setiap produk.",
   },
   {
     q: "Berapa biaya berlangganan TapPOS?",

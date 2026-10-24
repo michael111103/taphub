@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     "software UMKM",
     "aplikasi usaha",
     "TapPOS",
-    "TapBooks",
+    "TapBisnis",
   ],
   alternates: { canonical: "/" },
   openGraph: {

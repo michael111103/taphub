@@ -61,8 +61,8 @@ export const products: Product[] = [
     icon: "M6 3h9l3 3v15H6zM9 9h6M9 13h6M9 17h4",
   },
   {
-    slug: "tapbooks",
-    name: "TapBooks",
+    slug: "tapbisnis",
+    name: "TapBisnis",
     summary: "Pembukuan dan laporan keuangan otomatis, bisa terhubung ke penjualan marketplace.",
     category: "Keuangan",
     group: "software",

@@ -26,7 +26,7 @@ export default async function MainLayout({ children }: { children: React.ReactNo
 
   const books = subscriptions.find((s) => s.product_code === "books");
   const trialDays = trialDaysLeft(subscriptions);
-  const planLabel = books?.status === "active" ? `TapBooks ${books.plan?.name ?? ""}`.trim() : books?.status === "trial" ? "TapBooks · Uji coba gratis" : "Belum berlangganan";
+  const planLabel = "TapBisnis";
 
   return (
     <AppShell

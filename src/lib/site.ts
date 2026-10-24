@@ -8,7 +8,7 @@ export const site = {
   websiteUrl: "https://website.taphub.id",
   tagline: "Software yang saling terhubung untuk bisnis",
   description:
-    "TapHub adalah ekosistem software untuk usaha Indonesia: TapPOS, TapBooks, TapInvoice, TapStock, dan lainnya untuk penjualan, keuangan, operasional, dan gaya hidup.",
+    "TapHub adalah ekosistem software untuk usaha Indonesia: TapPOS, TapBisnis, TapInvoice, TapStock, dan lainnya untuk penjualan, keuangan, operasional, dan gaya hidup.",
   email: "halo@taphub.id",
   // Format internasional tanpa tanda +, dipakai untuk link WhatsApp
   whatsapp: "6281281321903",

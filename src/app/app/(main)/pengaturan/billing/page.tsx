@@ -12,7 +12,7 @@ export default async function BillingPage() {
   const { data } = await supabase.from("billing_invoices").select("id, number, cycle, total, status, created_at, expires_at, payment_method, payment_channel, plans(name, product_code)").eq("org_id", org.id).order("created_at", { ascending: false });
   type B = { id: string; number: string; cycle: string; total: number; status: string; created_at: string; expires_at: string; payment_method: string; payment_channel: string | null; plans: { name: string; product_code: string } | null };
   const rows = (data ?? []) as unknown as B[];
-  const NAMES: Record<string, string> = { books: "TapBooks", pos: "TapPOS", invoice: "TapInvoice", stock: "TapStock", staff: "TapStaff" };
+  const NAMES: Record<string, string> = { books: "TapBisnis", pos: "TapPOS", invoice: "TapInvoice", stock: "TapStock", staff: "TapStaff" };
   return (
     <div className="mx-auto max-w-[1100px]">
       <PageHeader title="Billing" icon="card" tone="amber" crumbs={[{ label: "Pengaturan", href: href("/pengaturan") }, { label: "Billing" }]} actions={<Link href={href("/langganan")} className="btn-primary"><Icon name="rocket" size={16} /> Upgrade paket</Link>} />
