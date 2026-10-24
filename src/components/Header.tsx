@@ -219,7 +219,7 @@ export default function Header() {
       </div>
 
       {/* Mobile */}
-      <div id="menu-mobile" hidden={!open} className="flex h-[calc(100dvh-4rem)] flex-col border-t border-line bg-ink md:hidden">
+      <div id="menu-mobile" hidden={!open} className={`${open ? "flex" : "hidden"} h-[calc(100dvh-4rem)] flex-col border-t border-line bg-ink md:hidden`}>
         <nav aria-label="Navigasi mobile" className="flex-1 overflow-y-auto px-4">
           <ul className="divide-y divide-line">
             {groups.map((g) => {
