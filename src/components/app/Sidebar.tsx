@@ -196,7 +196,7 @@ export default function Sidebar({ base, orgName, planLabel, trialDays, userName,
           </span>
           <div className={`min-w-0 flex-1 ${mini ? "lg:hidden" : ""}`}>
             <p className="truncate text-sm font-semibold">{userName}</p>
-            <p className="truncate text-xs text-muted">{userEmail}</p>
+            {userEmail && <p className="truncate text-xs text-muted">{userEmail}</p>}
           </div>
           <form action={signOut} className={mini ? "lg:hidden" : ""}>
             <button type="submit" className="grid h-9 w-9 place-items-center rounded-lg text-rose-500 transition hover:bg-rose-500/10" aria-label="Keluar">

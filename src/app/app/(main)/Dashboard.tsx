@@ -141,7 +141,6 @@ export default function Dashboard({ summary: s, days, base, orgName, userName }:
         <div>
           <div className="flex flex-wrap items-center gap-2">
             <h1 className="text-xl font-semibold tracking-[-0.01em] sm:text-2xl">Beranda</h1>
-            <span className="mono rounded-md border border-line px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted">{orgName}</span>
           </div>
           <p className="mt-1 text-sm text-muted">Halo {userName.split(" ")[0] || "kamu"}, ini ringkasan usahamu {days} hari terakhir.</p>
         </div>
