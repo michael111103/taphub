@@ -87,18 +87,6 @@ export default function Sidebar({ base, orgName, planLabel, trialDays, userName,
         </div>
 
         <div className="flex-1 overflow-y-auto px-3 py-3 [scrollbar-width:thin]">
-          {/* Panduan */}
-          {!mini && (
-            <Link href={link("/panduan")} className="mb-3 block rounded-2xl border border-tide-2/20 bg-gradient-to-br from-tide-1/10 to-tide-2/10 p-3.5 transition hover:border-tide-2/40">
-              <span className="flex items-center gap-2 text-sm font-semibold text-accent">
-                <TileIcon name="rocket" size={26} />
-                Panduan memulai
-                <Icon name="chevron-right" size={16} className="ml-auto" />
-              </span>
-              <span className="mt-2 block text-xs text-muted">Buat tagihan, catat pembayaran, lihat laba rugi.</span>
-            </Link>
-          )}
-
           {!mini && (
             <label className="relative mb-3 block">
               <span className="sr-only">Cari menu</span>
