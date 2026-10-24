@@ -42,3 +42,6 @@ export const companyTestimonials: Testimonial[] = [
 
 /** Testimoni di halaman TapPOS (pos.taphub.id) */
 export const posTestimonials: Testimonial[] = [];
+
+/** Testimoni di website.taphub.id (TapWebsite) */
+export const websiteTestimonials: Testimonial[] = [];

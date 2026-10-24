@@ -32,14 +32,19 @@ Pengaturan subdomain ada di `src/middleware.ts`:
 
 ## Menyambungkan domain di Vercel
 
-1. Vercel, buka project ini, Settings, Domains: tambahkan `taphub.id`, `www.taphub.id`, dan `pos.taphub.id`.
-2. Di pengelola DNS domain, ikuti record yang diminta Vercel (biasanya A record untuk `taphub.id` dan CNAME `cname.vercel-dns.com` untuk `www` dan `pos`).
+1. Vercel, buka project ini, Settings, Domains: tambahkan `taphub.id`, `www.taphub.id`, `pos.taphub.id`, dan `website.taphub.id`.
+2. Di pengelola DNS domain, ikuti record yang diminta Vercel (biasanya A record untuk `taphub.id` dan CNAME `cname.vercel-dns.com` untuk `www`, `pos`, dan `website`).
 3. Settings, Environment Variables (Production), lalu redeploy:
    - `NEXT_PUBLIC_MAIN_URL` = `https://taphub.id`
    - `NEXT_PUBLIC_POS_URL` = `https://pos.taphub.id`
+   - `NEXT_PUBLIC_WEBSITE_URL` = `https://website.taphub.id`
 
-   Tanpa dua variabel ini, link antar `taphub.id` dan `pos.taphub.id` tidak akan benar.
-4. Google Search Console: daftarkan `taphub.id` dan `pos.taphub.id`, lalu kirim sitemap masing-masing (`/sitemap.xml`).
+   Tanpa variabel ini, link antar `taphub.id`, `pos.taphub.id`, dan `website.taphub.id` tidak akan benar.
+4. Google Search Console: daftarkan `taphub.id`, `pos.taphub.id`, dan `website.taphub.id`, lalu kirim sitemap masing-masing (`/sitemap.xml`).
+
+## TapWebsite (website.taphub.id)
+
+Halaman ada di `src/app/(site)/website/page.tsx`. Paket dan harga di konstanta `plans` di file itu masih **draft**, konfirmasi dulu sebelum diumumkan. Tombol "Pesan paket" sementara membuka WhatsApp; setelah payment gateway tersambung, ganti dengan link checkout. FAQ di `websiteFaqs` (`src/lib/faq.ts`), testimoni di `websiteTestimonials` (`src/lib/testimonials.ts`).
 
 ## Menambah artikel blog
 
@@ -63,7 +68,7 @@ Daftar produk Tap ada di `src/lib/products.ts`, FAQ di `src/lib/faq.ts`.
 ## Gambar yang perlu diganti
 
 File di bawah masih gambar sementara. Timpa dengan gambar asli **dengan nama dan rasio yang sama**,
-atau ganti nama filenya di kode (`src/app/pos/page.tsx`, `src/lib/articles.ts`, `src/app/tentang-kami/page.tsx`) lalu perbarui teks `alt`:
+atau ganti nama filenya di kode (`src/app/(site)/pos/page.tsx`, `src/app/(site)/website/page.tsx`, `src/lib/articles.ts`, `src/app/tentang-kami/page.tsx`) lalu perbarui teks `alt`:
 
 | File | Ukuran | Isi |
 | --- | --- | --- |
@@ -74,6 +79,10 @@ atau ganti nama filenya di kode (`src/app/pos/page.tsx`, `src/lib/articles.ts`, 
 | `public/images/taphubpos5.png` | 1200×900 (4:3) | Produk & stok |
 | `public/images/taphubpos6.png` | 1200×800 (3:2) | Usaha F&B |
 | `public/images/taphubpos7.png` | 1200×800 (3:2) | Retail & jasa |
+| `public/images/tapwebsite1.png` | 1200×900 (4:3) | TapWebsite: contoh landing page produk |
+| `public/images/tapwebsite2.png` | 1200×900 (4:3) | TapWebsite: contoh company profile |
+| `public/images/tapwebsite3.png` | 1200×900 (4:3) | TapWebsite: contoh toko online |
+| `public/images/tapwebsite4.png` | 1200×900 (4:3) | TapWebsite: contoh menu digital & katalog |
 | `public/images/artikel1.png` | 1200×630 | Sampul artikel aplikasi kasir cafe |
 | `public/images/artikel2.png` | 1200×630 | Sampul artikel sistem POS |
 | `public/images/tentang1.png` | 1600×900 (16:9) | Foto tim atau suasana kerja (halaman Tentang) |

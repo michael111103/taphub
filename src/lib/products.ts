@@ -1,4 +1,4 @@
-import { posHref } from "./site";
+import { posHref, websiteHref } from "./site";
 
 export type ProductCategory = "Penjualan" | "Keuangan" | "Operasional" | "Gaya hidup";
 export type ProductStatus = "featured" | "soon";
@@ -91,14 +91,15 @@ export const products: Product[] = [
     icon: "M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3 20a6 6 0 0 1 12 0M17 11a2.5 2.5 0 1 0 0-5M21 20a5 5 0 0 0-3-4.6",
   },
   {
-    slug: "tapreserve",
-    name: "TapReserve",
-    summary: "Reservasi meja dan booking jadwal, pelanggan memilih waktunya sendiri.",
-    category: "Operasional",
-    group: "software",
-    status: "soon",
+    slug: "tapwebsite",
+    name: "TapWebsite",
+    href: websiteHref(),
+    summary: "Website profesional untuk usahamu: landing page, company profile, sampai toko online, dibuatkan tim TapHub.",
+    category: "Penjualan",
+    group: "platform",
+    status: "featured",
     hue: ["#2DD4BF", "#0F766E"],
-    icon: "M4 6h16v14H4zM4 10h16M8 3v4M16 3v4M8 14h3",
+    icon: "M3 5h18v14H3zM3 9h18M6.5 7h.01M9 7h.01M7 13h6M7 16h4M16 12.5l2 1.5-2 1.5",
   },
   {
     slug: "taployalty",

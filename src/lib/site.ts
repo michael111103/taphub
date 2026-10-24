@@ -4,6 +4,8 @@ export const site = {
   url: "https://taphub.id",
   /** Domain landing page TapPOS (subdomain) */
   posUrl: "https://pos.taphub.id",
+  /** Domain landing page TapWebsite (subdomain) */
+  websiteUrl: "https://website.taphub.id",
   tagline: "Software yang saling terhubung untuk usaha Indonesia",
   description:
     "TapHub adalah ekosistem software untuk usaha Indonesia: TapPOS, TapBooks, TapInvoice, TapStock, dan lainnya untuk penjualan, keuangan, operasional, dan gaya hidup.",
@@ -45,5 +47,14 @@ export function mainHref(path: string) {
  */
 export function posHref(hash = "") {
   const base = process.env.NEXT_PUBLIC_POS_URL ?? "/pos";
+  return `${base}${hash}`;
+}
+
+/**
+ * Link ke landing page TapWebsite.
+ * Di produksi isi env NEXT_PUBLIC_WEBSITE_URL=https://website.taphub.id. Jika kosong memakai /website.
+ */
+export function websiteHref(hash = "") {
+  const base = process.env.NEXT_PUBLIC_WEBSITE_URL ?? "/website";
   return `${base}${hash}`;
 }

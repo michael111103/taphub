@@ -8,11 +8,11 @@ export const companyFaqs: Faq[] = [
   },
   {
     q: "Apa saja solusi yang ditawarkan oleh TapHub?",
-    a: "TapHub menawarkan solusi di empat bidang. Penjualan: aplikasi kasir dan manajemen pesanan, termasuk pesan lewat scan QR di meja, serta program poin dan member pelanggan. Keuangan: link pembayaran, invoice, dan pembukuan otomatis. Operasional: pengelolaan stok, absensi dan penggajian karyawan, serta reservasi. Gaya hidup: pencatatan pola makan dan aktivitas harian untuk hidup lebih sehat.",
+    a: "TapHub menawarkan solusi di empat bidang. Penjualan: aplikasi kasir dan manajemen pesanan, termasuk pesan lewat scan QR di meja, pembuatan website usaha, serta program poin dan member pelanggan. Keuangan: link pembayaran, invoice, dan pembukuan otomatis. Operasional: pengelolaan stok, serta absensi dan penggajian karyawan. Gaya hidup: pencatatan pola makan dan aktivitas harian untuk hidup lebih sehat.",
   },
   {
     q: "Produk apa saja yang dimiliki TapHub?",
-    a: "Rangkaian produk TapHub terdiri dari TapPOS (aplikasi kasir dan sistem POS), TapPay (link pembayaran dan QRIS), TapInvoice (invoice), TapBooks (pembukuan), TapStock (stok), TapStaff (karyawan), TapReserve (reservasi), TapLoyalty (poin dan member), dan TapHealth (pola hidup sehat). TapPOS adalah produk unggulan pertama kami, sementara produk lainnya dirilis secara bertahap.",
+    a: "Rangkaian produk TapHub terdiri dari TapPOS (aplikasi kasir dan sistem POS), TapPay (link pembayaran dan QRIS), TapInvoice (invoice), TapBooks (pembukuan), TapStock (stok), TapStaff (karyawan), TapWebsite (pembuatan website), TapLoyalty (poin dan member), dan TapHealth (pola hidup sehat). TapPOS dan TapWebsite sudah bisa dipakai, sementara produk lainnya dirilis secara bertahap.",
   },
   {
     q: "Siapa saja yang dapat menggunakan TapHub?",
@@ -81,5 +81,37 @@ export const posFaqs: Faq[] = [
   {
     q: "Bagaimana cara mulai memakai TapPOS?",
     a: "Hubungi tim TapHub lewat tombol Konsultasi sekarang atau WhatsApp. Kami akan mempelajari kebutuhan usahamu, menjadwalkan demo, lalu membantu pendaftaran, input menu atau produk, dan pengenalan cara pakai untuk tim kasirmu.",
+  },
+];
+
+/** FAQ di landing page TapWebsite (website.taphub.id) */
+export const websiteFaqs: Faq[] = [
+  {
+    q: "Apa itu TapWebsite?",
+    a: "TapWebsite adalah layanan pembuatan website untuk usaha dari TapHub. Tim kami merancang, membangun, dan menayangkan website usahamu, mulai dari landing page, company profile, sampai toko online. Kamu cukup memilih paket, mengirim materi seperti logo, foto, dan deskripsi usaha, lalu kami kerjakan sampai website online.",
+  },
+  {
+    q: "Berapa lama website saya selesai?",
+    a: "Tergantung paket. Landing page biasanya selesai sekitar 5 hari kerja, company profile sekitar 10 hari kerja, dan toko online sekitar 14 hari kerja, dihitung sejak materi dari kamu lengkap.",
+  },
+  {
+    q: "Apakah sudah termasuk domain dan hosting?",
+    a: "Ya. Setiap paket sudah termasuk domain, hosting, dan sertifikat SSL (gembok https) untuk tahun pertama. Setelah itu, perpanjangan domain dan hosting dibayar per tahun dan akan kami ingatkan sebelum jatuh tempo.",
+  },
+  {
+    q: "Bagaimana cara membayarnya?",
+    a: "Pembayaran online lewat payment gateway, dengan pilihan QRIS, transfer virtual account bank, dan e-wallet, sedang kami siapkan langsung di halaman ini. Sementara itu, pemesanan dan pembayaran dibantu oleh tim kami lewat WhatsApp.",
+  },
+  {
+    q: "Apakah saya bisa minta revisi desain?",
+    a: "Bisa. Setiap paket sudah termasuk beberapa kali revisi sesuai jumlah yang tertulis di paketnya. Revisi dikerjakan setelah kamu melihat rancangan awal, jadi website yang tayang sesuai dengan keinginanmu.",
+  },
+  {
+    q: "Apakah website bisa saya ubah sendiri setelah jadi?",
+    a: "Bisa. Kamu akan mendapat akses untuk mengganti teks, foto, produk, dan artikel sendiri. Kalau butuh bantuan, tim kami siap membantu lewat WhatsApp.",
+  },
+  {
+    q: "Apakah website saya mudah ditemukan di Google?",
+    a: "Setiap website kami bangun dengan SEO dasar: struktur halaman yang rapi, judul dan deskripsi halaman, sitemap, kecepatan yang baik, dan tampilan yang ramah HP. Posisi di Google tetap dipengaruhi persaingan dan konten, tapi fondasinya sudah siap.",
   },
 ];

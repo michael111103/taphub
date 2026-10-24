@@ -43,7 +43,7 @@ export default function Footer() {
 
         <Column title="Produk">
           <ul className="mt-4 space-y-3 text-sm text-muted">
-            {products.slice(0, 6).map((p) => (
+            {[...products].sort((a, b) => Number(!!b.href) - Number(!!a.href)).slice(0, 6).map((p) => (
               <li key={p.slug}>
                 <a href={p.href ?? mainHref("/#produk")} className="hover:text-fg">
                   {p.name}

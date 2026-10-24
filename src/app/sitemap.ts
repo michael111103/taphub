@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 import { articles } from "@/lib/articles";
 
-// Sitemap taphub.id. Landing page TapPOS punya sitemap sendiri di pos.taphub.id/sitemap.xml.
+// Sitemap taphub.id. Landing page TapPOS dan TapWebsite punya sitemap sendiri di subdomainnya.
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   return [

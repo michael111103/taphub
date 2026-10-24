@@ -11,17 +11,23 @@ import { createServerClient } from "@supabase/ssr";
  * - pos.taphub.id/<lainnya>   -> dialihkan ke taphub.id/<lainnya>
  * - taphub.id/pos             -> dialihkan permanen ke pos.taphub.id
  *
+ * website.taphub.id (landing TapWebsite), aturannya sama seperti pos.taphub.id:
+ * - website.taphub.id/            -> halaman src/app/(site)/website
+ * - website.taphub.id/sitemap.xml -> sitemap khusus TapWebsite
+ * - taphub.id/website             -> dialihkan permanen ke website.taphub.id
+ *
  * app.taphub.id (aplikasi TapHub)
  * - app.taphub.id/<path>      -> halaman src/app/app/<path> (URL di browser tetap app.taphub.id/<path>)
  * - taphub.id/app/<path>      -> dialihkan ke app.taphub.id/<path>
  *
  * Di preview Vercel (*.vercel.app) dan localhost, keduanya tetap bisa dibuka di /pos dan /app.
- * Tes subdomain di komputer sendiri: http://pos.localhost:3000 dan http://app.localhost:3000
+ * Tes subdomain di komputer sendiri: http://pos.localhost:3000, http://website.localhost:3000 dan http://app.localhost:3000
  */
 const MAIN_HOSTS = new Set(["taphub.id", "www.taphub.id"]);
 const MAIN_URL = "https://taphub.id";
 const POS_URL = "https://pos.taphub.id";
 const APP_URL = "https://app.taphub.id";
+const WEBSITE_URL = "https://website.taphub.id";
 
 function hostName(host: string) {
   return host.split(":")[0];
@@ -30,13 +36,17 @@ function isPosHost(host: string) {
   const name = hostName(host);
   return name === "pos.taphub.id" || name === "pos.localhost";
 }
+function isWebsiteHost(host: string) {
+  const name = hostName(host);
+  return name === "website.taphub.id" || name === "website.localhost";
+}
 function isAppHost(host: string) {
   const name = hostName(host);
   return name === "app.taphub.id" || name === "app.localhost";
 }
 
 // File yang selalu dilayani apa adanya di semua host
-const PASSTHROUGH = /^\/(_next|images|icon|apple-icon|taphub|whitelogo|favicon|opengraph-image|pos\/)/;
+const PASSTHROUGH = /^\/(_next|images|email|icon|apple-icon|taphub|whitelogo|favicon|opengraph-image|pos\/|website\/)/;
 const APP_PASSTHROUGH = /^\/(_next|images|icon|apple-icon|taphub|whitelogo|favicon|app\/)/;
 
 /**
@@ -112,12 +122,30 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(`${mainBase}${pathname}${search}`, 308);
   }
 
+  // ---------- website.taphub.id ----------
+  if (isWebsiteHost(host)) {
+    if (PASSTHROUGH.test(pathname) || pathname === "/website") return NextResponse.next();
+    const url = req.nextUrl.clone();
+    if (pathname === "/" || pathname === "/sitemap.xml" || pathname === "/robots.txt") {
+      url.pathname = pathname === "/" ? "/website" : `/website${pathname}`;
+      return NextResponse.rewrite(url);
+    }
+    const mainBase = host.startsWith("website.localhost") ? `http://${host.replace(/^website\./, "")}` : MAIN_URL;
+    return NextResponse.redirect(`${mainBase}${pathname}${search}`, 308);
+  }
+
   // ---------- taphub.id ----------
   if (MAIN_HOSTS.has(hostName(host))) {
     if (pathname === "/pos" || pathname.startsWith("/pos/")) {
       const rest = pathname.replace(/^\/pos/, "") || "/";
       if (!rest.startsWith("/opengraph-image")) {
         return NextResponse.redirect(`${POS_URL}${rest}${search}`, 308);
+      }
+    }
+    if (pathname === "/website" || pathname.startsWith("/website/")) {
+      const rest = pathname.replace(/^\/website/, "") || "/";
+      if (!rest.startsWith("/opengraph-image")) {
+        return NextResponse.redirect(`${WEBSITE_URL}${rest}${search}`, 308);
       }
     }
     if (pathname === "/app" || pathname.startsWith("/app/")) {

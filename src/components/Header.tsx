@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Logo from "./Logo";
-import { mainHref, posHref } from "@/lib/site";
+import { mainHref, posHref, websiteHref } from "@/lib/site";
 
 const nav = [
   { href: mainHref("/#produk"), label: "Produk" },
   { href: posHref(), label: "TapPOS" },
+  { href: websiteHref(), label: "TapWebsite" },
   { href: mainHref("/#keunggulan"), label: "Keunggulan" },
   { href: mainHref("/blog"), label: "Blog" },
   { href: mainHref("/tentang-kami"), label: "Tentang" },
