@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Ecosystem from "@/components/Ecosystem";
+import Image from "next/image";
 import ProductGrid from "@/components/ProductGrid";
 import FoundationGrid from "@/components/FoundationGrid";
 import CtaCard from "@/components/CtaCard";
@@ -35,8 +35,16 @@ export default function Home() {
             </a>
             <Link href="/#produk" className="btn-ghost">Lihat produk TapHub</Link>
           </div>
-          <div className="mt-16 sm:mt-20">
-            <Ecosystem />
+          <div className="-mx-4 mt-12 sm:mx-auto sm:mt-16 sm:max-w-6xl">
+            <Image
+              src="/hero.png"
+              alt="Tampilan aplikasi TapHub di laptop, tablet, dan HP: dashboard penjualan, grafik, saldo kas dan bank, serta ringkasan tagihan."
+              width={1672}
+              height={941}
+              priority
+              sizes="(min-width: 1152px) 1152px, 100vw"
+              className="h-auto w-full [mask-image:linear-gradient(to_bottom,black_82%,transparent)]"
+            />
           </div>
         </div>
       </section>
