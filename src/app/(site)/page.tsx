@@ -23,7 +23,7 @@ export default function Home() {
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(55%_45%_at_50%_0%,rgba(27,91,255,0.28),transparent_70%),radial-gradient(30%_30%_at_15%_60%,rgba(56,200,248,0.10),transparent_70%)]" />
         <div className="mx-auto max-w-page px-4 pb-16 pt-14 text-center sm:px-6 sm:pt-24">
           <h1 className="mx-auto max-w-4xl text-balance text-[2.5rem] font-semibold leading-[1.05] tracking-[-0.03em] sm:text-6xl lg:text-7xl">
-            Software yang saling terhubung untuk usaha Indonesia.
+            Software yang saling terhubung untuk bisnis.
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-8 text-muted">
             TapHub menyediakan rangkaian aplikasi untuk penjualan, keuangan, operasional, dan gaya hidup. Mulai dari satu produk, tambah yang lain saat usahamu berkembang.

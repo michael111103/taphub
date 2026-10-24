@@ -6,7 +6,7 @@ export const site = {
   posUrl: "https://pos.taphub.id",
   /** Domain landing page TapWebsite (subdomain) */
   websiteUrl: "https://website.taphub.id",
-  tagline: "Software yang saling terhubung untuk usaha Indonesia",
+  tagline: "Software yang saling terhubung untuk bisnis",
   description:
     "TapHub adalah ekosistem software untuk usaha Indonesia: TapPOS, TapBooks, TapInvoice, TapStock, dan lainnya untuk penjualan, keuangan, operasional, dan gaya hidup.",
   email: "halo@taphub.id",
